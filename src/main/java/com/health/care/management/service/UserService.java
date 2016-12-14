@@ -19,9 +19,5 @@ public interface UserService {
 
     UserDTO validateUser(UserDTO user);
 
-    /*
-     * @param username
-     */
-    UserDTO getUserbyUserName(String userName);
 
 }

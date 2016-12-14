@@ -52,6 +52,10 @@ public abstract class Constant {
     public static final String SAVE_BILL = "INSERT into bill(patient_name, doctor_name,amount,status,comment,diagnosis_id,patient_id) values(?,?,?,?,?,?,?)";
     public static final String FETCH_PAST_APPOINTMENTS = "SELECT bill.patient_name,bill.doctor_name,bill.amount,diagnosis."
             + "prescription,appointment.date,appointment.illness from bill inner join diagnosis on bill.diagnosis_id=diagnosis.diagnosis_id inner join appointment on diagnosis.appointment_id=appointment.appointment_id where bill.patient_id=?";
+
+    // Reporting related queries + one is FETCH_ALL_INVENTORTIES
+    public static final String LIST_OF_SINGLE_PATIENT_DETAIL = "select patient.patient_id,patient.first_name as p_first_name,patient.last_name as p_last_name,patient.date_of_birth,appointment.illness, doctor.registration_id, doctor.first_name as d_first_name,doctor.last_name as d_last_name,doctor.specialization,doctor.department, doctor.mobile_no,diagnosis.prescription,diagnosis.status from appointment inner join doctor on appointment.doctor_registration_id=doctor.registration_id INNER JOIN patient on appointment.patient_id=patient.patient_id inner join diagnosis on appointment.appointment_id = diagnosis.appointment_id where appointment.patient_id =%s";
+    public static final String LIST_OF_ALL_PATIENT = "select patient.patient_id,patient.first_name as p_first_name,patient.last_name as p_last_name,patient.date_of_birth,appointment.illness, doctor.registration_id, doctor.first_name as d_first_name,doctor.last_name as d_last_name,doctor.specialization,doctor.department, doctor.mobile_no,diagnosis.prescription,diagnosis.status from appointment inner join doctor on appointment.doctor_registration_id=doctor.registration_id INNER JOIN patient on appointment.patient_id=patient.patient_id inner join diagnosis on appointment.appointment_id = diagnosis.appointment_id";
     // Application Constants
 
     // logger Constants

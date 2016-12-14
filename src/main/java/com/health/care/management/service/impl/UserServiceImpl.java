@@ -9,7 +9,6 @@ import com.health.care.management.service.UserService;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.dao.EmptyResultDataAccessException;
 
-
 public class UserServiceImpl implements UserService {
 
     private UserDAO userDao;
@@ -34,18 +33,11 @@ public class UserServiceImpl implements UserService {
         }
         if (returnedUserId != 0) {
             newUser.setId(returnedUserId);
-        }
-        else {
+        } else {
             System.out.println("Id already exists");
         }
 
         return newUser;
-    }
-
-    @Override
-    public UserDTO getUserbyUserName(String userName) {
-        // TODO Auto-generated method stub
-        return null;
     }
 
     @Override
@@ -56,8 +48,7 @@ public class UserServiceImpl implements UserService {
             user.setStatus("valid");
             user.setRole(returnedDomain.getRole());
             user.setId(returnedDomain.getId());
-        }
-        else {
+        } else {
             user.setStatus("invalid");
         }
         return user;

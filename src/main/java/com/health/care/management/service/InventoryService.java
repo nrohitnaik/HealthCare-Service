@@ -16,4 +16,6 @@ public interface InventoryService {
     List<Bill> fetchAllDiagnoisedDetail(String status);
 
     int saveBill(Bill bill);
+
+    String generateReport(int selectedReportvalue);
 }

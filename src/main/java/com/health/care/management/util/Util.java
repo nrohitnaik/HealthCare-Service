@@ -41,4 +41,18 @@ public class Util {
         }
         return returnValue;
     }
+
+    // Fomrated date .
+    public static java.util.Date getFormatedDateForString(String dateInString) {
+        java.util.Date formattedDate = null;
+        try {
+            formattedDate = new SimpleDateFormat("YYYY/MM/DD").parse(dateInString);
+        } catch (ParseException execption) {
+
+            // TODO calling the relevant portion of the caller
+            System.out.println("Invalid date input, please try again");
+        }
+        return formattedDate;
+    }
+
 }

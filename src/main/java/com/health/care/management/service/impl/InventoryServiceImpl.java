@@ -2,8 +2,10 @@ package com.health.care.management.service.impl;
 
 import com.health.care.management.dao.DiagnosisDAO;
 import com.health.care.management.dao.InventoryDAO;
+import com.health.care.management.dao.ReportingDao;
 import com.health.care.management.dao.impl.DiagnosisDAOImpl;
 import com.health.care.management.dao.impl.InventoryDAOImpl;
+import com.health.care.management.dao.impl.ReportingDaoImpl;
 import com.health.care.management.domain.Bill;
 import com.health.care.management.domain.Inventory;
 import com.health.care.management.service.InventoryService;
@@ -17,11 +19,14 @@ public class InventoryServiceImpl implements InventoryService {
 
     private InventoryDAO inventoryDao;
     private DiagnosisDAO diagnosisDao;
+    private ReportingDao reportingDao;
 
     public InventoryServiceImpl() {
         this.inventoryDao = new InventoryDAOImpl();
         this.diagnosisDao = new DiagnosisDAOImpl();
+        this.reportingDao = new ReportingDaoImpl();
     }
+
     @Override
     public List<Inventory> getAllInventory() {
         return inventoryDao.fetchAllInventory();
@@ -41,8 +46,6 @@ public class InventoryServiceImpl implements InventoryService {
     public List<Bill> fetchAllDiagnoisedDetail(String status) {
         List<Map<String, Object>> returnedValue = diagnosisDao.fetchTreatmentDetailsByStatus(status);
         List<Bill> listOfDiagnosiedDetails = new ArrayList<>();
-
-
 
         returnedValue.forEach(a -> {
             Bill bill = new Bill();
@@ -68,14 +71,14 @@ public class InventoryServiceImpl implements InventoryService {
 
     @Override
     public int saveBill(Bill bill) {
-        //calculate number of days admitted
-        //create bill ammount save bill datble
+        // calculate number of days admitted
+        // create bill ammount save bill datble
 
         double doctorConsultingFees = 400;
         double bedCharge = 1500;
         int numberOfDaysAdmitted = 0;
         if (bill.getAdmitDate() != null) {
-        long diff = Math.abs(bill.getAdmitDate().getTime() - bill.getDischargeDate().getTime());
+            long diff = Math.abs(bill.getAdmitDate().getTime() - bill.getDischargeDate().getTime());
             numberOfDaysAdmitted = Math.toIntExact(diff / (24 * 60 * 60 * 1000));
         }
         double billAmount = doctorConsultingFees + (bedCharge * numberOfDaysAdmitted);
@@ -87,6 +90,37 @@ public class InventoryServiceImpl implements InventoryService {
 
         return diagnosisDao.updateTheDiagnosisStatus("billed", bill.getDiagnosisId());
 
+    }
+
+    @Override
+    public String generateReport(int selectedReportvalue) {
+        String locationOfPdf = null;
+        switch (selectedReportvalue) {
+
+        // "Hi Welcome to report generating srevice"
+        // + "\nSelect '1' to generate report for all available doctors"
+        // + "\nSelect '2'for report of all patient"
+        // + "\nSelect '3'for report of all inventories"
+        // + "\nSelect '4' for report of particular patient"
+        case 1: {
+            locationOfPdf = reportingDao.generateListOfDoctorReport();
+            break;
+        }
+        case 2: {
+            locationOfPdf = reportingDao.generateDetailsOfAllPatient();
+            break;
+        }
+        case 3: {
+            locationOfPdf = reportingDao.generateInventoryReport();
+            break;
+
+        }
+        default: {
+            locationOfPdf = reportingDao.generateReportOfSinglePatient(selectedReportvalue);
+        }
+        }
+
+        return locationOfPdf;
     }
 
 }

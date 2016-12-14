@@ -133,8 +133,6 @@ public class PatientConsoleHelper {
 
     }
 
-
-
     private void populateExistingDetails(Patient patient, String patientUserName) {
         System.out.println("Please choose an option to edit and '0' to complete updating");
         // poviding existing details to console using toString defined in Patient.java
@@ -142,7 +140,7 @@ public class PatientConsoleHelper {
         switchOption(patient, patientUserName);
     }
 
-    private void switchOption(Patient patient, String patientUserName){
+    private void switchOption(Patient patient, String patientUserName) {
         int selectedOption = patientScanner.nextInt();
         patientScanner.nextLine();
         switch (selectedOption) {
@@ -334,8 +332,8 @@ public class PatientConsoleHelper {
 
         List<Appointment> appointmentlist = appointmentService.fetchAppointments(patientId, "booked", "patient");
         if (0 != appointmentlist.size()) {
-        System.out.println("Appointment Id\t Date&Time\t Comment\t illness\t Doctor Name ");
-        appointmentlist.forEach(a -> System.out.println(a.toStringForPatient()));
+            System.out.println("Appointment Id\t Date&Time\t Comment\t illness\t Doctor Name ");
+            appointmentlist.forEach(a -> System.out.println(a.toStringForPatient()));
         } else {
             System.out.println("No appointments has been scheduled. Please use booking service to book an appointment");
         }
