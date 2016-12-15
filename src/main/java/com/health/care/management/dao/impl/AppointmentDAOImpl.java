@@ -45,7 +45,6 @@ public class AppointmentDAOImpl implements AppointmentDAO {
 
     @Override
     public int saveAppointment(Appointment appointment) {
-
         return jdbcTemplate.update(Constant.SAVE_APPOINTMENT, appointment.getTimeSlot(), appointment.getComment(), appointment.getIllness(), appointment.getDoctorUserId(),
                 appointment.getStatus(), appointment.getPatientUserId());
     }
@@ -64,7 +63,6 @@ public class AppointmentDAOImpl implements AppointmentDAO {
 
     @Override
     public int updateStatusOfAppointment(String status, int appointmentId) {
-        // TODO Auto-generated method stub
         return jdbcTemplate.update(Constant.UPDATE_APPOINTMENT, new Object[] { status, appointmentId });
     }
 
@@ -78,7 +76,6 @@ public class AppointmentDAOImpl implements AppointmentDAO {
             appointment.setDoctorName(rs.getString("d_first_name") + " " + rs.getString("d_last_name"));
             appointment.setIllness(rs.getString("illness"));
             appointment.setPatientName(rs.getString("p_first_name") + " " + rs.getString("p_last_name"));
-            // appointment.setStatus(rs.getString("status"));
             appointment.setTimeSlot(rs.getTimestamp("date"));
             appointment.setAlergies(rs.getString("alergies"));
             return appointment;

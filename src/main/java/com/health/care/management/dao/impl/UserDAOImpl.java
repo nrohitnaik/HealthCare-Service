@@ -30,17 +30,11 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    // need to return the auto generated key refer
-    // http://www.concretepage.com/spring/how-to-get-auto-generated-id-in-spring-jdbc
     public int saveUser(User user) {
-        // Insert query
-        // TODO create a statment n update
         int userId = 0;
         try {
             KeyHolder keyHolder = new GeneratedKeyHolder();
             jdbcTemplate.update(new PreparedStatementCreator() {
-
-                // "INSERT INTO user (username, password, role) VALUES(?, ?, ?)"
                 @Override
                 public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
                     PreparedStatement pst = con.prepareStatement(SAVE_USER, new String[] { "user_id" });
@@ -60,7 +54,6 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public User validateUser(User user) {
-        // TODO Auto-generated method stub
         User userFromDB = jdbcTemplate.queryForObject(VALIDATE_USER, new Object[] { user.getUserName() }, new UserRowMapper());
         return userFromDB;
     }

@@ -14,7 +14,7 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 public class HealthCareServiceConfiguration {
 
-    // Single DB connection to be maintained accross application
+    // Single DB connection to be maintained across application
     private static JdbcTemplate jdbcTemplate = null;
     public static JdbcTemplate getJdbcConnection() {
         if (null == jdbcTemplate) {

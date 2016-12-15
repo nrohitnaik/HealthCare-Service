@@ -60,14 +60,6 @@ public class PatientDAOImpl implements PatientDAO {
             }
         }, keyHolder);
         return Math.toIntExact(keyHolder.getKey().longValue());
-
-        // // save new patient details
-        // return jdbcTemplate.update(SAVE_PATIENT,
-        // new Object[] { patient.getFirstName(), patient.getLastName(), patient.getSex(),
-        // patient.getDob(), patient.getAddress(), patient.getPhoneNumber(),
-        // patient.getAlergies(),
-        // patient.getUserId() });
-
     }
 
     @Override

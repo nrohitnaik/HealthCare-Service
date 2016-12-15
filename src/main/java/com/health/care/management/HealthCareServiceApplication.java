@@ -93,8 +93,6 @@ public class HealthCareServiceApplication {
         this.doctorService = doctorService;
     }
 
-    // TODO this is written in a generic way to test the application. Once all the functionality is implemented
-    // exceptions must be handled in the appropriate way and resource must be closed..
     public static void main(String[] args) throws Exception {
 
         HealthCareServiceApplication appInitializer = HealthCareServiceApplication.getnstance();

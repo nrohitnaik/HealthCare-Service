@@ -27,7 +27,7 @@ public class InventoryConsoleHelper {
 
     }
 
-    public void inventoryManagerMenu() {
+     void inventoryManagerMenu() {
 
         System.out.println("Welcome to Managment Menu");
         System.out.println(

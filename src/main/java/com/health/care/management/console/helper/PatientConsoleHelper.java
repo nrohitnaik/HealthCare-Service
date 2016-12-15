@@ -34,7 +34,6 @@ public class PatientConsoleHelper {
     }
 
     // provides form to register as patient
-    // TODO Need to handle user table sync up
     @SuppressWarnings("deprecation")
     public void signUpAspatient(String userName, int userId) {
         patientScanner.nextLine();
@@ -73,8 +72,7 @@ public class PatientConsoleHelper {
     }
 
     // Form to provide patient with option
-    // TODO proper menu should be configure. i,e no dead end / program termination
-    public void validatedPatientMenu(String userName, int patientId, int userId) {
+     void validatedPatientMenu(String userName, int patientId, int userId) {
         System.out.println("Hi " + userName + " ,please choose the following option");
         System.out.println("Select '1' to update personal details.");
         System.out.println("Select '2' for booking apppointment.");
@@ -86,7 +84,6 @@ public class PatientConsoleHelper {
         switch (selectedValue) {
         case 0: {
             HealthCareServiceApplication.getnstance().getUserConsoleHelper().kickStartApplication();
-
         }
 
         case 1: {
@@ -97,7 +94,6 @@ public class PatientConsoleHelper {
             System.out.println("press anykey to return to previous menu");
             patientScanner.nextLine(); // swallow the value, just a pause n forcing user to select back option
             validatedPatientMenu(userName, patientId, userId);// Provide the menu again in order not to break the app
-
         }
         case 2: {
             System.out.println("Welcome to appointment booking service");
@@ -145,7 +141,6 @@ public class PatientConsoleHelper {
         patientScanner.nextLine();
         switch (selectedOption) {
 
-        /// TODO provide output to ask user if he has any other details to be edited if yes populte the patient object
         case (1): {
             System.out.println("Enter the new first name. Existing is " + patient.getFirstName());
             String updatedFirstName = patientScanner.nextLine();
@@ -293,7 +288,6 @@ public class PatientConsoleHelper {
         } else {
             date = "dayafter";
         }
-        // TODO fetch time slots from Timeslot based on doctor selected
         List<Date> timeslots = doctorService.findAvailableAppointmentForDoctor(doctorRegId, date);
         System.out.println("Select time slot");
 

@@ -32,7 +32,7 @@ public class DoctorConsoleHelper {
     }
 
     // Form to sign up as doctor
-    public void signupAsDoctor(String userName, int userId) {
+    void signupAsDoctor(String userName, int userId) {
         Doctor newDoctor = new Doctor();
         System.out.println("Enter the first name");
         newDoctor.setFirstName(doctorScanner.nextLine());
@@ -72,7 +72,7 @@ public class DoctorConsoleHelper {
         }
     }
 
-    public void validatedDoctorMenu(String userName, int userId, int registrationId) {
+     void validatedDoctorMenu(String userName, int userId, int registrationId) {
         System.out.println("Hi Doc " + userName + ", please choose the following option");
         System.out.println("Select '1' to update personal details.");
         System.out.println("Select '2' to view apppointments.");

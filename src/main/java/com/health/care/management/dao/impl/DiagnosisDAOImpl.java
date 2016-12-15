@@ -35,26 +35,4 @@ public class DiagnosisDAOImpl implements DiagnosisDAO {
         return jdbcTemplate.update(Constant.UPDATE_STATUS_OF_DIAGNOSIS_BY_ID, new Object[] { status, diagnosisId });
     }
 
-//    // Not used as of now .. if not requried we can delete this
-//    private class BillRowMapper implements RowMapper<Bill> {
-//
-//        @Override
-//        public Bill mapRow(ResultSet rs, int rowNum) throws SQLException {
-//            Bill bill = new Bill();
-//            bill.setPrescription(rs.getString("prescription"));
-//            bill.setDoctorName("Dr. " + rs.getString("d_first_name") + " " + rs.getString("d_last_name"));
-//            String salutation = "Miss. ";
-//            if (rs.getInt("sex") == 1) {
-//                salutation = "Mr. ";
-//            }
-//            bill.setPatientName(salutation + rs.getString("p_first_name") + " " + rs.getString("p_last_name"));
-//            bill.setAdmitDate(rs.getTimestamp("admit_date"));
-//            bill.setDischargeDate(rs.getTimestamp("discharge_date"));
-//            bill.setDoctorSpecialization(rs.getString("specialization"));
-//            bill.setDiagnosisId(rs.getInt("diagnosis_id"));
-//            return bill;
-//        }
-
-    }
-
-
+}
