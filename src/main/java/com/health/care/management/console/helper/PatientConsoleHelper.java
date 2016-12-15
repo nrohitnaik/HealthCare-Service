@@ -4,7 +4,6 @@ import com.health.care.management.HealthCareServiceApplication;
 import com.health.care.management.domain.Appointment;
 import com.health.care.management.domain.PastAppointmentDetails;
 import com.health.care.management.domain.Patient;
-import com.health.care.management.dto.PatientDTO;
 import com.health.care.management.service.AppointmentService;
 import com.health.care.management.service.DoctorService;
 import com.health.care.management.service.PatientService;
@@ -37,7 +36,7 @@ public class PatientConsoleHelper {
     @SuppressWarnings("deprecation")
     public void signUpAspatient(String userName, int userId) {
         patientScanner.nextLine();
-        PatientDTO newPatient = new PatientDTO();
+        Patient newPatient = new Patient();
         System.out.println("Enter the first name");
         newPatient.setFirstName(patientScanner.nextLine());
         System.out.println("Enter the last name");

@@ -1,7 +1,6 @@
 package com.health.care.management.console.helper;
 
 import com.health.care.management.domain.User;
-import com.health.care.management.dto.UserDTO;
 import com.health.care.management.service.DoctorService;
 import com.health.care.management.service.PatientService;
 import com.health.care.management.service.UserService;
@@ -54,7 +53,7 @@ public class UserConsoleHelper {
         int initialSelction = userScanner.nextInt();
         if (initialSelction == 1) {
             // Used to validate the user and respond with appropriate pages
-            UserDTO returnValue = validateUserLogin();
+            User returnValue = validateUserLogin();
             if (returnValue.getStatus() == "valid") {
                 switch (returnValue.getRole()) {
                 case "patient": {
@@ -102,7 +101,7 @@ public class UserConsoleHelper {
 
         System.out.println("Enter the desired password");
         String password = userScanner.next();
-        UserDTO userDTO = new UserDTO();
+        User userDTO = new User();
         userDTO.setRole(roleOfUser);
         userDTO.setPassword(password);
         userDTO.setUserName(userName);
@@ -126,8 +125,8 @@ public class UserConsoleHelper {
     }
 
     // login validation and providing respective pages based on the role of the user
-    public UserDTO validateUserLogin() {
-        UserDTO userToBeValidated = new UserDTO();
+    public User validateUserLogin() {
+        User userToBeValidated = new User();
         System.out.println("Enter the user name");
         userToBeValidated.setUserName(userScanner.next());
         System.out.println("Enter the password");

@@ -11,24 +11,17 @@ import com.health.care.management.dao.PatientDAO;
 import com.health.care.management.dao.impl.PatientDAOImpl;
 import com.health.care.management.domain.PastAppointmentDetails;
 import com.health.care.management.domain.Patient;
-import com.health.care.management.dto.PatientDTO;
 import com.health.care.management.service.PatientService;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import org.codehaus.jackson.map.ObjectMapper;
 public class PatientServiceImpl implements PatientService {
-
-
-    // Used for mapping of object
-    private ObjectMapper objectMapper;
 
     private PatientDAO patientDAO;
 
     public PatientServiceImpl() {
-        this.objectMapper = new ObjectMapper();
         this.patientDAO = new PatientDAOImpl();
     }
 
@@ -40,9 +33,8 @@ public class PatientServiceImpl implements PatientService {
     @Override
     // TODO DTO requried or domain will do the job
     // need to handle SQL Exceptions
-    public int savePatientInfo(PatientDTO patient) {
-        Patient newPatient = objectMapper.convertValue(patient, Patient.class);
-        return patientDAO.savePatientInfo(newPatient);
+    public int savePatientInfo(Patient patient) {
+        return patientDAO.savePatientInfo(patient);
     }
 
     @Override

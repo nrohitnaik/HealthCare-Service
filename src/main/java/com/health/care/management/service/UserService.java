@@ -15,9 +15,9 @@ public interface UserService {
     /*
      * @param user
      */
-    User saveUser(UserDTO user);
+    User saveUser(User user);
 
-    UserDTO validateUser(UserDTO user);
+    User validateUser(User user);
 
 
 }

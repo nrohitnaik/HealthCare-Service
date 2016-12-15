@@ -50,7 +50,7 @@ public class ReportingDaoImpl implements ReportingDao {
                 Columns.column("Qualification", "qualification", DataTypes.stringType()),
                 Columns.column("Mobile Number", "mobile_no", DataTypes.bigDecimalType()),
                 Columns.column("Email", "email", DataTypes.stringType()),
-                Columns.column("Status", "status", DataTypes.stringType()))
+                Columns.column("Status(1= available,0=unavailable)", "status", DataTypes.stringType()))
                 .title(Components.text("List of all the doctors").setHorizontalAlignment(HorizontalAlignment.CENTER))
                 .pageFooter(Components.pageXofY())
                 .setDataSource(Constant.FETCH_ALL_DOCTOR, DataSourceUtils.getConnection(HealthCareServiceConfiguration.getJdbcConnection().getDataSource()));

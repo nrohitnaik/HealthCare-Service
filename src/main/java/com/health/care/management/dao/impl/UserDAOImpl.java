@@ -3,6 +3,7 @@ package com.health.care.management.dao.impl;
 import static com.health.care.management.constant.Constant.SAVE_USER;
 import static com.health.care.management.constant.Constant.VALIDATE_USER;
 
+import com.health.care.management.HealthCareServiceApplication;
 import com.health.care.management.HealthCareServiceConfiguration;
 import com.health.care.management.dao.UserDAO;
 import com.health.care.management.domain.User;
@@ -13,6 +14,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import org.springframework.dao.DuplicateKeyException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.RowMapper;
@@ -54,7 +56,15 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public User validateUser(User user) {
-        User userFromDB = jdbcTemplate.queryForObject(VALIDATE_USER, new Object[] { user.getUserName() }, new UserRowMapper());
+        User userFromDB = null;
+        try{
+         userFromDB = jdbcTemplate.queryForObject(VALIDATE_USER, new Object[] { user.getUserName() }, new UserRowMapper());
+        return userFromDB;
+        }catch(EmptyResultDataAccessException ex){
+            System.out.println("Username doesn't exist. please register or try with valid credentials");
+            HealthCareServiceApplication.getnstance().getUserConsoleHelper().kickStartApplication();
+            
+        }
         return userFromDB;
     }
     
