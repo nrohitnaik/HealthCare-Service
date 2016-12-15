@@ -5,7 +5,11 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-public class Util {
+public final class Util {
+    
+    private Util(){
+        // To prevent instantiation
+    }
 
     public static Date getSqlDateFromJavaDate(java.util.Date date) {
         java.util.Calendar cal = Calendar.getInstance();
