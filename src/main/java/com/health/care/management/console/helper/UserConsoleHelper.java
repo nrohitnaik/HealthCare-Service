@@ -110,16 +110,13 @@ public class UserConsoleHelper {
     public void signUpUser(String role) {
         // need to validate the user
         String roleOfUser = role;
-        User userDTO = new User();
+
         System.out.println("Enter the user name");
         String userName = userScanner.next();
         
-        userDTO.setUserName(userScanner.next());
-        
-        
         System.out.println("Enter the desired password");
         String password = userScanner.next();
-       
+        User userDTO = new User();
         userDTO.setRole(roleOfUser);
         userDTO.setPassword(password);
         userDTO.setUserName(userName);

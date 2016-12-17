@@ -24,8 +24,8 @@ public class HealthCareServiceConfiguration {
 	 *         across the application
 	 */
 	public static JdbcTemplate getJdbcConnection() {
-		LOGGER.info("Creating jdbc instacane..");
 		if (null == jdbcTemplate) {
+ 			LOGGER.info("Creating jdbc instacane..");
 			try {
 				Properties properties = new Properties();
 				InputStream ioStream = HealthCareServiceApplication.class.getClassLoader()
