@@ -79,7 +79,7 @@ public class InventoryConsoleHelper {
                 availablity = "Yes";
             }
             System.out.println(a.getRegistrationId() + "\t\t" + a.getFirstName() + " " + a.getLastName() + "\t\t" + a.getSpecialization() + "\t\t" + a.getDepartment() + "\t\t"
-                    + a.getEmail() + "\t\t" + a.getMobileNumber() + "\t\t" + availablity);
+                    + a.getEmail() + "\t\t" + a.getPhoneNumber() + "\t\t" + availablity);
         });
         System.out.println("Press any key to return to previous menu..");
         inventoryScanner.nextLine(); // swallow the input and call the inventory menu

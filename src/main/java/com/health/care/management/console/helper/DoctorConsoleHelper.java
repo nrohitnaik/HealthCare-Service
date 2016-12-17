@@ -60,7 +60,7 @@ public class DoctorConsoleHelper {
 		System.out.println("Brief description about work experience");
 		newDoctor.setExperience(doctorScanner.nextLine());
 		System.out.println("Enter the mobile number ");
-		newDoctor.setMobileNumber(doctorScanner.nextLong());
+		newDoctor.setPhoneNumber(doctorScanner.nextLong());
 		doctorScanner.nextLine();
 		System.out.println("Enter the email");
 		newDoctor.setEmail(doctorScanner.nextLine());
@@ -186,10 +186,10 @@ public class DoctorConsoleHelper {
 			break;
 		}
 		case (5): {
-			System.out.println("Enter the mobile number.. Existing is " + doctor.getMobileNumber());
+			System.out.println("Enter the mobile number.. Existing is " + doctor.getPhoneNumber());
 			long updatedMobileNumber = doctorScanner.nextLong();
 			if (0 != updatedMobileNumber) {
-				doctor.setMobileNumber(updatedMobileNumber);
+				doctor.setPhoneNumber(updatedMobileNumber);
 			}
 			break;
 		}

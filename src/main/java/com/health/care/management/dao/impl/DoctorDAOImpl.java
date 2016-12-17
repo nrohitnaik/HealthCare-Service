@@ -34,7 +34,7 @@ public class DoctorDAOImpl implements DoctorDAO {
 
         return jdbcTemplate.update(SAVE_DOCTOR,
                 new Object[] { doctor.getRegistrationId(), doctor.getFirstName(), doctor.getLastName(), doctor.getSpecialization(), doctor.getDepartment(), doctor.getExperience(),
-                        doctor.getQualification(), doctor.getMobileNumber(), doctor.getEmail(), doctor.getWorkingHours(), doctor.isAvailability(), doctor.getUserId() });
+                        doctor.getQualification(), doctor.getPhoneNumber(), doctor.getEmail(), doctor.getWorkingHours(), doctor.isAvailability(), doctor.getUserId() });
     }
 
     /* (non-Javadoc)
@@ -44,7 +44,7 @@ public class DoctorDAOImpl implements DoctorDAO {
     public int updateDoctorInfo(Doctor doctor) {
         return jdbcTemplate.update(UPDATE_DOCTOR_INFO,
                 new Object[] { doctor.getFirstName(), doctor.getLastName(), doctor.getSpecialization(), doctor.getDepartment(), doctor.getExperience(), doctor.getQualification(),
-                        doctor.getMobileNumber(), doctor.getEmail(), doctor.getWorkingHours(), doctor.isAvailability(), doctor.getUserId() });
+                        doctor.getPhoneNumber(), doctor.getEmail(), doctor.getWorkingHours(), doctor.isAvailability(), doctor.getUserId() });
     }
 
     /* (non-Javadoc)
@@ -98,7 +98,7 @@ public class DoctorDAOImpl implements DoctorDAO {
             doctor.setDepartment(rs.getString("department"));
             doctor.setExperience(rs.getString("experience"));
             doctor.setQualification(rs.getString("qualification"));
-            doctor.setMobileNumber(rs.getLong("mobile_no"));
+            doctor.setPhoneNumber(rs.getLong("mobile_no"));
             doctor.setEmail(rs.getString("email"));
             doctor.setWorkingHours("working_hours");
             doctor.setAvailability(rs.getInt("status"));

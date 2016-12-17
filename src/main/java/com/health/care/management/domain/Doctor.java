@@ -1,14 +1,11 @@
 package com.health.care.management.domain;
 
 
-public class Doctor {
+public class Doctor extends Person{
 
     private int registrationId;
-    private String firstName;
-    private String lastName;
     private String specialization;
     private String department;
-    private long mobileNumber;
     private String qualification;
     private String workingHours;
     private String email;
@@ -31,33 +28,7 @@ public class Doctor {
         this.registrationId = id;
     }
 
-    /**
-     * @return the firstName
-     */
-    public String getFirstName() {
-        return this.firstName;
-    }
-
-    /**
-     * @param firstName the firstName to set
-     */
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    /**
-     * @return the lastName
-     */
-    public String getLastName() {
-        return this.lastName;
-    }
-
-    /**
-     * @param lastName the lastName to set
-     */
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
+   
 
     /**
      * @return the specialization
@@ -87,19 +58,6 @@ public class Doctor {
         this.department = department;
     }
 
-    /**
-     * @return the mobileNumber
-     */
-    public long getMobileNumber() {
-        return this.mobileNumber;
-    }
-
-    /**
-     * @param mobileNumber the mobileNumber to set
-     */
-    public void setMobileNumber(long mobileNumber) {
-        this.mobileNumber = mobileNumber;
-    }
 
     /**
      * @return the qualification
@@ -201,7 +159,7 @@ public class Doctor {
     public String toString() {
         return String.format(
                 "1. First Name: %s \n2. Last Name: %s \n3. Specialization=%s \n4. Department=%s \n5. Mobile Number=%s \n6. Qualification=%s \n7. Working Hours=%s \n8. email=%s \n9. Experience=%s \n10. availability=%s",
-                this.firstName, this.lastName, this.specialization, this.department, this.mobileNumber, this.qualification, this.workingHours, this.email, this.experience,
+                getFirstName(), getLastName(), this.specialization, this.department, getPhoneNumber(), this.qualification, this.workingHours, this.email, this.experience,
                 this.availability);
     }
 

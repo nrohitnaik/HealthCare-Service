@@ -68,7 +68,7 @@ public class DoctorServiceImpl implements DoctorService {
                 aDoctor.setAvailability(0);
             }
             aDoctor.setEmail(a.get("email").toString());
-            aDoctor.setMobileNumber(Long.valueOf(a.get("mobile_no").toString()));
+            aDoctor.setPhoneNumber(Long.valueOf(a.get("mobile_no").toString()));
             aDoctor.setRegistrationId(Integer.valueOf(a.get("registration_id").toString()));
             aDoctor.setQualification(a.get("qualification").toString());
             aDoctor.setSpecialization(a.get("specialization").toString());

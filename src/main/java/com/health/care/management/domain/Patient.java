@@ -7,14 +7,11 @@ package com.health.care.management.domain;
 
 import java.util.Date;
 
-public class Patient {
+public class Patient extends Person{
 
     private long id;
     private int userId;
-    private String firstName;
-    private String lastName;
     private String address;
-    private long phoneNumber;
     private int sex;
     private Date dob;
     private String alergies;
@@ -28,22 +25,7 @@ public class Patient {
         this.id = id;
     }
 
-    public String getFirstName() {
-        return this.firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return this.lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
+   
     public String getAddress() {
         return this.address;
     }
@@ -52,13 +34,7 @@ public class Patient {
         this.address = address;
     }
 
-    public long getPhoneNumber() {
-        return this.phoneNumber;
-    }
 
-    public void setPhoneNumber(long phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
 
     /**
      * @return the sex
@@ -141,7 +117,7 @@ public class Patient {
         return String.format("1. First Name: %s \n" + "2. Last Name: %s \n" + "3. Address: %s \n" + "4. Mobile Number: %s \n" + "5. Sex: %s \n" + "6. Date of birth: %s \n"
                 + "7. Alergies are : %s",
 
-                this.firstName, this.lastName, this.address, this.phoneNumber, this.sex, this.dob, this.alergies);
+               getFirstName(), getLastName(), this.address, getPhoneNumber(), this.sex, this.dob, this.alergies);
     }
 
 }
