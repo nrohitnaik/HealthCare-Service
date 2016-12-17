@@ -16,11 +16,6 @@ public class AppointmentServiceImpl implements AppointmentService {
         this.appointmentDAO = new AppointmentDAOImpl();
     }
 
-    @Override
-    public List<Appointment> fetchAppointmentbyID(int id) {
-        // TODO Auto-generated method stub
-        return null;
-    }
 
     @Override
     public int saveAppointment(Appointment appointment) {

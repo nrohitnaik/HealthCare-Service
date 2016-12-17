@@ -7,14 +7,31 @@ import java.util.List;
 
 public interface InventoryDAO {
 
-    // to fetch all the inventory
+    /**
+     * @return  List<Inventory>
+     * to fetch all the inventory
+     */
     List<Inventory> fetchAllInventory();
 
-    // update inventory based on id
+    /**
+     * @param inventory
+     * @return rows updated
+     * update inventory based on id
+     */
     int updatedInventory(Inventory inventory);
 
+    /**
+     * @param inventory
+     * @return
+     * saves inventory
+     */
     int addInventory(Inventory inventory);
 
+    /**
+     * @param bill
+     * @return
+     * saves bill
+     */
     int saveBill(Bill bill);
 
 

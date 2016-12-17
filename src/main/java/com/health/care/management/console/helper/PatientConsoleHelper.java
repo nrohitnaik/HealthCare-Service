@@ -16,10 +16,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
+import org.apache.log4j.Logger;
 import org.springframework.dao.EmptyResultDataAccessException;
 
 public class PatientConsoleHelper {
-
+	private static Logger LOGGER = Logger.getLogger(PatientConsoleHelper.class);
     private Scanner patientScanner;
     private PatientService patientService;
     private DoctorService doctorService;
@@ -32,7 +33,12 @@ public class PatientConsoleHelper {
         this.appointmentService = new AppointmentServiceImpl();
     }
 
-    // provides form to register as patient
+   
+    /**
+     * @param userName
+     * @param userId
+     * provides form to register as patient
+     */
     @SuppressWarnings("deprecation")
     public void signUpAspatient(String userName, int userId) {
         patientScanner.nextLine();
@@ -59,19 +65,27 @@ public class PatientConsoleHelper {
         int patientId = patientService.savePatientInfo(newPatient);
         if (0 != patientId) {
             // Call patient menu
+        	LOGGER.info("Patient details have been successfully saved "+ patientId);
+        	LOGGER.debug("Patient details have been successfully saved "+ newPatient.toString());
             System.out.println("Hi " + newPatient.getFirstName() + ", details have been saved press any key to return to main menu");
             patientScanner.nextLine();// swallow the key pressed
             validatedPatientMenu(userName, patientId, userId);
         } else {
             System.out.println("Internal error occured. Please update the info again");
+            LOGGER.warn("Patient details was not updated for id "+ newPatient.getId());
             signUpAspatient(userName, userId);
             // if it fails again need to provide option to logout
         }
 
     }
 
-    // Form to provide patient with option
-     void validatedPatientMenu(String userName, int patientId, int userId) {
+     /**
+     * @param userName
+     * @param patientId
+     * @param userId
+     * Form to provide patient with option
+     */
+    void validatedPatientMenu(String userName, int patientId, int userId) {
         System.out.println("Hi " + userName + " ,please choose the following option");
         System.out.println("Select '1' to update personal details.");
         System.out.println("Select '2' for booking apppointment.");
@@ -79,7 +93,6 @@ public class PatientConsoleHelper {
         System.out.println("Select '4' for viewing the future appointments");
         System.out.println("Select '0' to logout");
         int selectedValue = patientScanner.nextInt();
-
         switch (selectedValue) {
         case 0: {
             HealthCareServiceApplication.getnstance().getUserConsoleHelper().kickStartApplication();
@@ -128,6 +141,11 @@ public class PatientConsoleHelper {
 
     }
 
+    /**
+     * @param patient
+     * @param patientUserName
+     * Populates the returned value from db on console
+     */
     private void populateExistingDetails(Patient patient, String patientUserName) {
         System.out.println("Please choose an option to edit and '0' to complete updating");
         // poviding existing details to console using toString defined in Patient.java
@@ -135,6 +153,11 @@ public class PatientConsoleHelper {
         switchOption(patient, patientUserName);
     }
 
+    /**
+     * @param patient
+     * @param patientUserName
+     * used to provide option to update patient details
+     */
     private void switchOption(Patient patient, String patientUserName) {
         int selectedOption = patientScanner.nextInt();
         patientScanner.nextLine();
@@ -217,6 +240,11 @@ public class PatientConsoleHelper {
         }
     }
 
+    /**
+     * @param patientUserName
+     * @param patient
+     * update the patient details
+     */
     private void updateUser(String patientUserName, Patient patient) {
         patientService.updatePatient(patient);
         System.out.println(patient.getFirstName() + " details updated sccuessfully. Press any key to return to previous menu");
@@ -225,7 +253,14 @@ public class PatientConsoleHelper {
         validatedPatientMenu(patientUserName, Math.toIntExact(patient.getId()), patient.getUserId());
     }
 
-    // if user selects '1' this option has to presented
+     
+    /**
+     * @param userName
+     * @param patientId
+     * @param userId
+     * @return 
+     * if user selects '1' this option has to presented
+     */
     private String getPatientUpdatePage(String userName, int patientId, int userId) {
         String message = null;
         try {
@@ -241,7 +276,12 @@ public class PatientConsoleHelper {
         return message;
     }
 
-    // case '2' if patient choose to book appointment
+    /**
+     * @param patientUserName
+     * @param patientId
+     * @return
+     * case '2' if patient choose to book appointment
+     */
     private int captureBookingInfo(String patientUserName, int patientId) {
         patientScanner.nextLine();
         System.out.println("Illness");
@@ -307,7 +347,12 @@ public class PatientConsoleHelper {
 
     }
 
-    // case '3' if patient wants to view future appointments
+    
+    /**
+     * @param patientId
+     * @return
+     * case '3' if patient wants to view future appointments
+     */
     private int patientFutureAppointment(int patientId) {
         System.out.println("Sr.No \t\t illness \t\t Prescription \t\t Doctor Name \t\t Bill Amount \t\t date");
         List<PastAppointmentDetails> pastAppointmentList = patientService.fetchPastAppointmentDetials(patientId);
@@ -320,7 +365,12 @@ public class PatientConsoleHelper {
         return 0;// need to return back to the user option so need a return value. No meaningful data to return hence returning 0
     }
 
-    // case '4' if patient wants to look at past appointments
+    
+    /**
+     * @param patientId
+     * @return
+     *  case '4' if patient wants to look at past appointments
+     */
     private int patientPastAppointment(int patientId) {
 
         List<Appointment> appointmentlist = appointmentService.fetchAppointments(patientId, "booked", "patient");

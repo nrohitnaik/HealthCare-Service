@@ -22,6 +22,9 @@ public class AppointmentDAOImpl implements AppointmentDAO {
         this.jdbcTemplate = HealthCareServiceConfiguration.getJdbcConnection();
     }
 
+    /* (non-Javadoc)
+     * @see com.health.care.management.dao.AppointmentDAO#findAvailableAppointmentForDoctor(int, java.lang.String)
+     */
     @Override
     public List<Date> findAvailableAppointmentForDoctor(int userId, String date) {
         List<Date> returnValue = null;
@@ -43,29 +46,45 @@ public class AppointmentDAOImpl implements AppointmentDAO {
         return returnValue;
     }
 
+    /* (non-Javadoc)
+     * @see com.health.care.management.dao.AppointmentDAO#saveAppointment(com.health.care.management.domain.Appointment)
+     */
     @Override
     public int saveAppointment(Appointment appointment) {
         return jdbcTemplate.update(Constant.SAVE_APPOINTMENT, appointment.getTimeSlot(), appointment.getComment(), appointment.getIllness(), appointment.getDoctorUserId(),
                 appointment.getStatus(), appointment.getPatientUserId());
     }
 
+    /* (non-Javadoc)
+     * @see com.health.care.management.dao.AppointmentDAO#fetchAppointmentsByPatientId(int, java.lang.String)
+     */
     @Override
     public List<Appointment> fetchAppointmentsByPatientId(int patientId, String status) {
         return jdbcTemplate.query(Constant.FETCH_APPOINTMENT_BY_PATIENT_ID, new Object[] { patientId, status }, new AppointmentRowMapper());
 
     }
 
+    /* (non-Javadoc)
+     * @see com.health.care.management.dao.AppointmentDAO#fetchAppointmentsByDoctorRegsitartionId(int, java.lang.String)
+     */
     @Override
     public List<Appointment> fetchAppointmentsByDoctorRegsitartionId(int registartionId, String status) {
         return jdbcTemplate.query(Constant.FETCH_APPOINTMENT_BY_DOC_REG_ID, new Object[] { registartionId, status }, new AppointmentRowMapper());
 
     }
 
+    /* (non-Javadoc)
+     * @see com.health.care.management.dao.AppointmentDAO#updateStatusOfAppointment(java.lang.String, int)
+     */
     @Override
     public int updateStatusOfAppointment(String status, int appointmentId) {
         return jdbcTemplate.update(Constant.UPDATE_APPOINTMENT, new Object[] { status, appointmentId });
     }
 
+    /**
+     * Appointment row mapper which maps the appointment table to Appointment pojo
+     *
+     */
     private class AppointmentRowMapper implements RowMapper<Appointment> {
 
         @Override

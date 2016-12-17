@@ -9,10 +9,18 @@ import com.health.care.management.domain.User;
 
 public interface UserDAO {
 
-    // This method will save new user and return the user id.
+    /**
+     * @param user
+     * @return
+     * This method will save new user and return the user id.
+     */
     int saveUser(User user);
 
-    // this method is used to validate the user and return the role
+    /**
+     * @param user
+     * @return
+     * this method is used to validate the user and return the role
+     */
     User validateUser(User user);
 
 }

@@ -26,6 +26,9 @@ public class DoctorDAOImpl implements DoctorDAO {
         this.jdbcTemplate = HealthCareServiceConfiguration.getJdbcConnection();
     }
 
+    /* (non-Javadoc)
+     * @see com.health.care.management.dao.DoctorDAO#saveDoctorInfo(com.health.care.management.domain.Doctor)
+     */
     @Override
     public int saveDoctorInfo(Doctor doctor) {
 
@@ -34,6 +37,9 @@ public class DoctorDAOImpl implements DoctorDAO {
                         doctor.getQualification(), doctor.getMobileNumber(), doctor.getEmail(), doctor.getWorkingHours(), doctor.isAvailability(), doctor.getUserId() });
     }
 
+    /* (non-Javadoc)
+     * @see com.health.care.management.dao.DoctorDAO#updateDoctorInfo(com.health.care.management.domain.Doctor)
+     */
     @Override
     public int updateDoctorInfo(Doctor doctor) {
         return jdbcTemplate.update(UPDATE_DOCTOR_INFO,
@@ -41,11 +47,17 @@ public class DoctorDAOImpl implements DoctorDAO {
                         doctor.getMobileNumber(), doctor.getEmail(), doctor.getWorkingHours(), doctor.isAvailability(), doctor.getUserId() });
     }
 
+    /* (non-Javadoc)
+     * @see com.health.care.management.dao.DoctorDAO#findDoctorByUserID(int)
+     */
     @Override
     public Doctor findDoctorByUserID(int doctorUserId) {
         return jdbcTemplate.queryForObject(FETCH_DOCTOR_DETAILS_BY_USERNAME, new Object[] { doctorUserId }, new DoctorRowMapper());
     }
 
+    /* (non-Javadoc)
+     * @see com.health.care.management.dao.DoctorDAO#findAllDepartment()
+     */
     @Override
     public List<String> findAllDepartment() {
         return jdbcTemplate.queryForList(Constant.FETCH_DEPT_LIST, String.class);
@@ -53,18 +65,27 @@ public class DoctorDAOImpl implements DoctorDAO {
 
 
 
+    /* (non-Javadoc)
+     * @see com.health.care.management.dao.DoctorDAO#findDoctorDetailsByDepartment(java.lang.String)
+     */
     @Override
     public List<Map<String, Object>> findDoctorDetailsByDepartment(String deptName) {
         return jdbcTemplate.queryForList(Constant.FETCH_DOCT_LIST_BY_DEPT, deptName);
     }
 
 
+    /* (non-Javadoc)
+     * @see com.health.care.management.dao.DoctorDAO#fetchAllDoctors()
+     */
     @Override
     public List<Map<String, Object>> fetchAllDoctors() {
         return jdbcTemplate.queryForList(Constant.FETCH_ALL_DOCTOR);
     }
 
-    // Row mapper for doctor
+    /**
+     * Row mapper for doctor which maps doctor table to doctor pojo
+     *
+     */
     private class DoctorRowMapper implements RowMapper<Doctor> {
 
         @Override

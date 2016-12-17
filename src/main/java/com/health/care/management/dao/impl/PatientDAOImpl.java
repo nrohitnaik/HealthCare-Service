@@ -32,12 +32,18 @@ public class PatientDAOImpl implements PatientDAO {
         this.jdbcTemplate = HealthCareServiceConfiguration.getJdbcConnection();
     }
 
+    /* (non-Javadoc)
+     * @see com.health.care.management.dao.PatientDAO#findPatientById(int)
+     */
     @Override
     public Patient findPatientById(int userId) {
         return jdbcTemplate.queryForObject(FETCH_PATIENT_DETAILS_BY_USERNAME, new Object[] { userId }, new PatientRowMapper());
 
     }
 
+    /* (non-Javadoc)
+     * @see com.health.care.management.dao.PatientDAO#savePatientInfo(com.health.care.management.domain.Patient)
+     */
     @Override
     public int savePatientInfo(Patient patient) {
 
@@ -62,19 +68,27 @@ public class PatientDAOImpl implements PatientDAO {
         return Math.toIntExact(keyHolder.getKey().longValue());
     }
 
+    /* (non-Javadoc)
+     * @see com.health.care.management.dao.PatientDAO#updatePatientInfo(com.health.care.management.domain.Patient)
+     */
     @Override
     public int updatePatientInfo(Patient patient) {
         return jdbcTemplate.update(UPDATE_PATIENT_INFO, new Object[] { patient.getFirstName(), patient.getLastName(), patient.getSex(), patient.getDob(), patient.getAddress(),
                 patient.getPhoneNumber(), patient.getAlergies(), patient.getUserId() });
     }
 
+    /* (non-Javadoc)
+     * @see com.health.care.management.dao.PatientDAO#fetchPastAppointmentDetials(int)
+     */
     @Override
-    // TODO this will return map of objects
     public List<Map<String, Object>> fetchPastAppointmentDetials(int patientId) {
         return jdbcTemplate.queryForList(Constant.FETCH_PAST_APPOINTMENTS, new Object[] { patientId });
     }
 
-    // Row mapper for patient
+    /**
+     * Row mapper for patient table
+     *
+     */
     private class PatientRowMapper implements RowMapper<Patient> {
 
         @Override

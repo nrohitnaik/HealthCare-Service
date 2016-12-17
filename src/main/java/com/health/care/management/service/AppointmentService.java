@@ -6,7 +6,6 @@ import java.util.List;
 
 public interface AppointmentService {
 
-    List<Appointment> fetchAppointmentbyID(int id);
 
     int saveAppointment(Appointment appointment);
 

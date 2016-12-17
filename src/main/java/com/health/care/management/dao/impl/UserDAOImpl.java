@@ -25,12 +25,15 @@ public class UserDAOImpl implements UserDAO {
 
     private JdbcTemplate jdbcTemplate;
 
-    // Parameterized contructor to initialize the jdbc
+    //  contructor to initialize the jdbc
     public UserDAOImpl() {
         super();
         this.jdbcTemplate = HealthCareServiceConfiguration.getJdbcConnection();
     }
 
+    /* (non-Javadoc)
+     * @see com.health.care.management.dao.UserDAO#saveUser(com.health.care.management.domain.User)
+     */
     @Override
     public int saveUser(User user) {
         int userId = 0;
@@ -54,6 +57,9 @@ public class UserDAOImpl implements UserDAO {
         return userId;
     }
 
+    /* (non-Javadoc)
+     * @see com.health.care.management.dao.UserDAO#validateUser(com.health.care.management.domain.User)
+     */
     @Override
     public User validateUser(User user) {
         User userFromDB = null;

@@ -20,6 +20,9 @@ import net.sf.dynamicreports.report.exception.DRException;
 public class ReportingDaoImpl implements ReportingDao {
 
 
+    /* (non-Javadoc)
+     * @see com.health.care.management.dao.ReportingDao#generateInventoryReport()
+     */
     @Override
     public String generateInventoryReport() {
         JasperReportBuilder report = DynamicReports.report();
@@ -38,6 +41,9 @@ public class ReportingDaoImpl implements ReportingDao {
         return generateReport(report, inventoryFilePath);
     }
 
+    /* (non-Javadoc)
+     * @see com.health.care.management.dao.ReportingDao#generateListOfDoctorReport()
+     */
     @Override
     public String generateListOfDoctorReport() {
         JasperReportBuilder report = DynamicReports.report();
@@ -60,6 +66,9 @@ public class ReportingDaoImpl implements ReportingDao {
 
 
 
+    /* (non-Javadoc)
+     * @see com.health.care.management.dao.ReportingDao#generateDetailsOfAllPatient()
+     */
     @Override
     public String generateDetailsOfAllPatient() {
         JasperReportBuilder report = DynamicReports.report();
@@ -84,6 +93,9 @@ public class ReportingDaoImpl implements ReportingDao {
 
     }
 
+    /* (non-Javadoc)
+     * @see com.health.care.management.dao.ReportingDao#generateReportOfSinglePatient(int)
+     */
     @Override
     public String generateReportOfSinglePatient(int patientId) {
         JasperReportBuilder report = DynamicReports.report();
@@ -108,6 +120,11 @@ public class ReportingDaoImpl implements ReportingDao {
         return generateReport(report, detailsOfSinglePatientFilePath);
     }
 
+    /**
+     * @param reportObject
+     * @param filePath
+     * @return
+     */
     private String generateReport(JasperReportBuilder reportObject, String filePath) {
         try {
             // show the report
@@ -122,6 +139,11 @@ public class ReportingDaoImpl implements ReportingDao {
         return filePath;
     }
 
+    /**
+     * @param PatientId
+     * @return 
+     * dynamically generates query and feeds generateReportOfSinglePatient
+     */
     private String getQueryForPatient(int PatientId) {
         String getPatientDetailsById = String.format(Constant.LIST_OF_SINGLE_PATIENT_DETAIL, PatientId);
         return getPatientDetailsById;

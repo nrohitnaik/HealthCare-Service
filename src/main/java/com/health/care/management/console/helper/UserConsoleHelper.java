@@ -22,6 +22,9 @@ public class UserConsoleHelper {
 
     private Scanner userScanner;
 
+    /**
+     * Default constructor
+     */
     public UserConsoleHelper() {
         this.patientConsoleHelper = new PatientConsoleHelper();
         this.doctorConsoleHelper = new DoctorConsoleHelper();
@@ -31,21 +34,11 @@ public class UserConsoleHelper {
         this.patientService = new PatientServiceImpl();
         this.userScanner = new Scanner(System.in);
     }
-
-    public void getInitialForm() {
-        System.out.println("Select '1' to register as patient");
-        System.out.println("Select '2' to register as doctor");
-        int registrationOption = userScanner.nextInt();
-        if (registrationOption == 1) {
-            signUpUser("patient");
-        } else if (registrationOption == 2) {
-            signUpUser("doctor");
-        } else {
-            System.out.println("Improper selection made.Try again..");
-            getInitialForm();
-        }
-    }
-
+    
+    
+    /**
+     * Entry form for the application
+     */
     public void kickStartApplication() {
         System.out.println("Press '1' to login");
         System.out.println("Press '2' to register");
@@ -90,23 +83,48 @@ public class UserConsoleHelper {
         }
     }
 
-    /// need to call the db and validate if the user is existing or not
-    // TODO no exception must be communicated , invalid username mustbe given and re- register the user
+    /**
+     * Provides form to register as patient / doctor
+     * 
+     */
+    public void getInitialForm() {
+        System.out.println("Select '1' to register as patient");
+        System.out.println("Select '2' to register as doctor");
+        int registrationOption = userScanner.nextInt();
+        if (registrationOption == 1) {
+            signUpUser("patient");
+        } else if (registrationOption == 2) {
+            signUpUser("doctor");
+        } else {
+            System.out.println("Improper selection made.Try again..");
+            getInitialForm();
+        }
+    }
+
+
+
+    /**
+     * @param role
+     * Provides form to sign up 
+     */
     public void signUpUser(String role) {
         // need to validate the user
         String roleOfUser = role;
-
+        User userDTO = new User();
         System.out.println("Enter the user name");
         String userName = userScanner.next();
-
+        
+        userDTO.setUserName(userScanner.next());
+        
+        
         System.out.println("Enter the desired password");
         String password = userScanner.next();
-        User userDTO = new User();
+       
         userDTO.setRole(roleOfUser);
         userDTO.setPassword(password);
         userDTO.setUserName(userName);
 
-        // call userService and return the userName if valid userName or else return error message
+        // call userService and returns the userName if valid userName or else return error message
         User savedUser = userService.saveUser(userDTO);
 
         if (0 != savedUser.getId()) {
@@ -125,6 +143,10 @@ public class UserConsoleHelper {
     }
 
     // login validation and providing respective pages based on the role of the user
+    /**
+     * @return User
+     * validates user has entered valid password or not
+     */
     public User validateUserLogin() {
         User userToBeValidated = new User();
         System.out.println("Enter the user name");

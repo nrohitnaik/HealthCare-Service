@@ -7,21 +7,43 @@ import java.util.Map;
 
 public interface DoctorDAO {
 
-    // To register or update doctor info
-    int saveDoctorInfo(Doctor doctor);
+	/**
+	 * @param doctor
+	 * @return To save doctor info
+	 */
+	int saveDoctorInfo(Doctor doctor);
 
-    // To fetch the details of doctor using user name
-    Doctor findDoctorByUserID(int doctorUserId);
+	/**
+	 * @param doctorUserId
+	 * @return 
+	 * To fetch the details of doctor using user name
+	 */
+	Doctor findDoctorByUserID(int doctorUserId);
 
-    int updateDoctorInfo(Doctor doctor);
+	/**
+	 * @param doctor
+	 * @return 
+	 * Updates the doctor info
+	 */
+	int updateDoctorInfo(Doctor doctor);
 
-    // to fetch all the departments from doctor table
-    List<String> findAllDepartment();
+	/**
+	 * @return List<String> 
+	 * to fetch all the departments from doctor table
+	 */
+	List<String> findAllDepartment();
 
-    // To get the list of doctor based on department
-    List<Map<String, Object>> findDoctorDetailsByDepartment(String deptName);
+	/**
+	 * @param deptName
+	 * @return List<Map<String, Object>> 
+	 * To get the list of doctor based on department
+	 */
+	List<Map<String, Object>> findDoctorDetailsByDepartment(String deptName);
 
-    // To fetch all the doctor details from db
-    List<Map<String, Object>> fetchAllDoctors();
+	/**
+	 * @return List<Map<String, Object>> 
+	 * To fetch all the doctor details from db
+	 */
+	List<Map<String, Object>> fetchAllDoctors();
 
 }

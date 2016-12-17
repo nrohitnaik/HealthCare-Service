@@ -18,6 +18,9 @@ public class DiagnosisDAOImpl implements DiagnosisDAO {
         this.jdbcTemplate = HealthCareServiceConfiguration.getJdbcConnection();
     }
 
+    /* (non-Javadoc)
+     * @see com.health.care.management.dao.DiagnosisDAO#saveDiagnosiedInfoForAppoinntment(com.health.care.management.domain.Diagnosis)
+     */
     @Override
     public int saveDiagnosiedInfoForAppoinntment(Diagnosis diagnosis) {
         return jdbcTemplate.update(Constant.SAVE_DIAGNOSIS,
@@ -25,11 +28,17 @@ public class DiagnosisDAOImpl implements DiagnosisDAO {
 
     }
 
+    /* (non-Javadoc)
+     * @see com.health.care.management.dao.DiagnosisDAO#fetchTreatmentDetailsByStatus(java.lang.String)
+     */
     @Override
     public List<Map<String, Object>> fetchTreatmentDetailsByStatus(String status) {
         return jdbcTemplate.queryForList(Constant.FETCH_DIAGNOSIED_INFO_BY_STATUS, new Object[] { status });
     }
 
+    /* (non-Javadoc)
+     * @see com.health.care.management.dao.DiagnosisDAO#updateTheDiagnosisStatus(java.lang.String, int)
+     */
     @Override
     public int updateTheDiagnosisStatus(String status, int diagnosisId) {
         return jdbcTemplate.update(Constant.UPDATE_STATUS_OF_DIAGNOSIS_BY_ID, new Object[] { status, diagnosisId });
