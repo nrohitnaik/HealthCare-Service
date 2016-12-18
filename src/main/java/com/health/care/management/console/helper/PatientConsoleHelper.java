@@ -35,9 +35,10 @@ public class PatientConsoleHelper {
 
    
     /**
+     * provides form to register as patient
      * @param userName
      * @param userId
-     * provides form to register as patient
+     * 
      */
     @SuppressWarnings("deprecation")
     public void signUpAspatient(String userName, int userId) {
@@ -80,10 +81,11 @@ public class PatientConsoleHelper {
     }
 
      /**
+      *Form to provide patient with option
      * @param userName
      * @param patientId
      * @param userId
-     * Form to provide patient with option
+     *
      */
     void validatedPatientMenu(String userName, int patientId, int userId) {
         System.out.println("Hi " + userName + " ,please choose the following option");
@@ -91,6 +93,7 @@ public class PatientConsoleHelper {
         System.out.println("Select '2' for booking apppointment.");
         System.out.println("Select '3' for viewing the appointment history");
         System.out.println("Select '4' for viewing the future appointments");
+        System.out.println("Select '5' to deactivate the account");
         System.out.println("Select '0' to logout");
         int selectedValue = patientScanner.nextInt();
         switch (selectedValue) {
@@ -118,7 +121,7 @@ public class PatientConsoleHelper {
         }
         case 3: {
             System.out.println("Welcome to view appointment history page");
-            patientFutureAppointment(patientId);// fetch details of future appointment
+            patientPastAppointment(patientId);// fetch details of past appointment
             System.out.println("Press any key to go back to previous menu");
             patientScanner.nextLine();// swallow any key and provide the main menu for patient.
             patientScanner.nextLine();
@@ -127,11 +130,27 @@ public class PatientConsoleHelper {
 
         case 4: {
             System.out.println("Welcome to view future appointments page");
-            patientPastAppointment(patientId);// fetch details of past appointment
+            patientFutureAppointment(patientId);// fetch details of future appointment
+            
             System.out.println("Press any key to go back to previous menu");
             patientScanner.nextLine();// swallow any key and provide the main menu for patient.
             validatedPatientMenu(userName, patientId, userId);// Provide the menu again in order not to break the app
         }
+        
+        case 5:{
+        	patientScanner.nextLine();
+        	System.out.println("Are you sure you want to deactivate the account\nPress 'yes' to deactivate\nPress 'no' to return to main menu");
+        	String toBeDeactivated=patientScanner.nextLine();
+	       		if(toBeDeactivated.equalsIgnoreCase("yes")){
+	       		patientService.updatePatientStatus(patientId, "deactivated");
+	       		System.out.println(userName +" account has been deactivated. In future if you wish to activate the account please login and choose option to reactivate the account\nGoodbye..");
+	       		HealthCareServiceApplication.getnstance().getUserConsoleHelper().kickStartApplication();
+	
+	       }else{
+           validatedPatientMenu(userName, patientId, userId);// Provide the menu again in order not to break the app
+
+       }
+       }
 
         default: {
             System.out.println("Invalid selection.. please select the proper value");
@@ -142,9 +161,10 @@ public class PatientConsoleHelper {
     }
 
     /**
+     * Populates the returned value from db on console
      * @param patient
      * @param patientUserName
-     * Populates the returned value from db on console
+     * 
      */
     private void populateExistingDetails(Patient patient, String patientUserName) {
         System.out.println("Please choose an option to edit and '0' to complete updating");
@@ -154,9 +174,10 @@ public class PatientConsoleHelper {
     }
 
     /**
+     * used to provide option to update patient details
      * @param patient
      * @param patientUserName
-     * used to provide option to update patient details
+     * 
      */
     private void switchOption(Patient patient, String patientUserName) {
         int selectedOption = patientScanner.nextInt();
@@ -239,11 +260,38 @@ public class PatientConsoleHelper {
             updateUser(patientUserName, patient);
         }
     }
+    
+    /**
+     * Checks the status of the patient if the patient is active validated menu is provided else user is provide with option to reactivate the account
+     * @param userName
+     * @param patientId
+     * @param userId
+     */
+    public void checkStatusOfPatient(String userName,int patientId, int userId){
+    String statusOfPatient=	patientService.checkPatientStatus(patientId);
+    	if(statusOfPatient.equalsIgnoreCase("active")){
+    		validatedPatientMenu(userName, patientId, userId);
+    	}
+    	else{
+    		System.out.println("Account is deactivated would you like to reactivate it\n 'yes' to activate\n 'no' to exit");
+    		String userChoice=patientScanner.nextLine();
+    		if(userChoice.equalsIgnoreCase("yes")){
+    			patientService.updatePatientStatus(patientId, "active");
+    			System.out.println("Account has been acticated. Press any key to return to the main menu");
+    			patientScanner.nextLine();
+    			validatedPatientMenu(userName, patientId, userId);
+    		}
+    		else{
+    			HealthCareServiceApplication.getnstance().getUserConsoleHelper().kickStartApplication();
+    		}
+    	}
+    }
 
     /**
+     * update the patient details
      * @param patientUserName
      * @param patient
-     * update the patient details
+     * 
      */
     private void updateUser(String patientUserName, Patient patient) {
         patientService.updatePatient(patient);
@@ -255,11 +303,12 @@ public class PatientConsoleHelper {
 
      
     /**
+     * if user selects '1' this option has to presented
      * @param userName
      * @param patientId
      * @param userId
      * @return 
-     * if user selects '1' this option has to presented
+     * 
      */
     private String getPatientUpdatePage(String userName, int patientId, int userId) {
         String message = null;
@@ -277,10 +326,11 @@ public class PatientConsoleHelper {
     }
 
     /**
+     * case '2' if patient choose to book appointment
      * @param patientUserName
      * @param patientId
      * @return
-     * case '2' if patient choose to book appointment
+     * 
      */
     private int captureBookingInfo(String patientUserName, int patientId) {
         patientScanner.nextLine();
@@ -349,38 +399,47 @@ public class PatientConsoleHelper {
 
     
     /**
+     *  case '3' if patient wants to look at past appointments
      * @param patientId
      * @return
-     * case '3' if patient wants to view future appointments
+     * 
      */
-    private int patientFutureAppointment(int patientId) {
-        System.out.println("Sr.No \t\t illness \t\t Prescription \t\t Doctor Name \t\t Bill Amount \t\t date");
-        List<PastAppointmentDetails> pastAppointmentList = patientService.fetchPastAppointmentDetials(patientId);
-        int count = 1;
-        for (PastAppointmentDetails appointmentDetail : pastAppointmentList) {
-            System.out.println(count + "\t\t" + appointmentDetail.getIllness() + "\t\t" + appointmentDetail.getPrescription() + "\t\t " + appointmentDetail.getDoctorName() + "\t\t"
-                    + appointmentDetail.getAmount() + "\t\t" + appointmentDetail.getAppointmentDate());
-            count++;
-        }
-        return 0;// need to return back to the user option so need a return value. No meaningful data to return hence returning 0
-    }
-
-    
+	private int patientPastAppointment(int patientId) {
+		int count = 1;
+		List<PastAppointmentDetails> pastAppointmentList = patientService.fetchPastAppointmentDetials(patientId);
+		if (!pastAppointmentList.isEmpty()) {
+			System.out.println("Sr.No \t\t illness \t\t Prescription \t\t Doctor Name \t\t Bill Amount \t\t date");
+			for (PastAppointmentDetails appointmentDetail : pastAppointmentList) {
+				System.out.println(count + "\t\t" + appointmentDetail.getIllness() + "\t\t"
+						+ appointmentDetail.getPrescription() + "\t\t " + appointmentDetail.getDoctorName() + "\t\t"
+						+ appointmentDetail.getAmount() + "\t\t" + appointmentDetail.getAppointmentDate());
+				count++;
+			}
+		} else {
+			System.out.println("No appointment details available");
+		}
+		return count;// need to return back to the user option so need a return value. No meaningful data to return hence returning count
+	}
+   
     /**
+     * case '4' if patient wants to view future appointments
      * @param patientId
      * @return
-     *  case '4' if patient wants to look at past appointments
+     * 
      */
-    private int patientPastAppointment(int patientId) {
+	private int patientFutureAppointment(int patientId) {
 
-        List<Appointment> appointmentlist = appointmentService.fetchAppointments(patientId, "booked", "patient");
-        if (0 != appointmentlist.size()) {
-            System.out.println("Appointment Id\t Date&Time\t Comment\t illness\t Doctor Name ");
-            appointmentlist.forEach(a -> System.out.println(a.toStringForPatient()));
-        } else {
-            System.out.println("No appointments has been scheduled. Please use booking service to book an appointment");
-        }
-        return 0; // need to return back to the user option so need a return value. No meaningful data to return hence returning 0
-    }
+		List<Appointment> appointmentlist = appointmentService.fetchAppointments(patientId, "booked", "patient");
+		if (!appointmentlist.isEmpty()) {
+			System.out.println("Appointment Id\t Date&Time\t Comment\t illness\t Doctor Name ");
+			appointmentlist.forEach(a -> System.out.println(a.toStringForPatient()));
+		} else {
+			System.out.println("No appointments has been scheduled. Please use booking service to book an appointment");
+		}
+		return appointmentlist.size(); // need to return back to the user option  so need a return value. No meaningful data to return hence returning  appointment size
+
+	}
+    	
+
 
 }

@@ -19,7 +19,10 @@ public abstract class Constant {
     public static final String FETCH_PATIENT_DETAILS_BY_USERNAME = "SELECT * FROM patient where user_id =?";
     public static final String UPDATE_PATIENT_INFO = "UPDATE patient SET first_name=?, last_name=?,sex=?, date_of_birth=?, address=?, mobile_number=?, alergies=?  WHERE user_id=?";
     public static final String SAVE_PATIENT = "INSERT INTO patient (first_name, last_name, sex, date_of_birth, address, mobile_number, alergies, user_id )  VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-
+  // TODO user_id or patient_id
+    public static final String UPDATE_STATUS_OF_PATIENT_BY_ID="UPDATE patient SET status=? WHERE patient_id=?";
+    public static final String CHECK_PATIENT_STATUS="SELECT status from patient WHERE patient_id=?";
+    
     // Doctor related queries
     public static final String SAVE_DOCTOR = "INSERT INTO doctor(registration_id,first_name,last_name,specialization,department,experience,qualification,mobile_no,email,working_hours,status,user_id) VALUES(?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     public static final String UPDATE_DOCTOR_INFO = "UPDATE doctor SET first_name=?, last_name=?,specialization=?,department=?,experience=?,qualification=?,mobile_no=?,email=?,working_hours=?,status=?  WHERE user_id=?";

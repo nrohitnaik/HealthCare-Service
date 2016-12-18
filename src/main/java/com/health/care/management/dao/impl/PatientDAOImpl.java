@@ -84,6 +84,23 @@ public class PatientDAOImpl implements PatientDAO {
     public List<Map<String, Object>> fetchPastAppointmentDetials(int patientId) {
         return jdbcTemplate.queryForList(Constant.FETCH_PAST_APPOINTMENTS, new Object[] { patientId });
     }
+    
+
+	/* (non-Javadoc)
+	 * @see com.health.care.management.dao.PatientDAO#updatePatientStatus(int, java.lang.String)
+	 */
+	@Override
+	public int updatePatientStatus(int patientId, String status) {
+		return jdbcTemplate.update(Constant.UPDATE_STATUS_OF_PATIENT_BY_ID,new Object[]{status,patientId});
+	}
+
+	/* (non-Javadoc)
+	 * @see com.health.care.management.dao.PatientDAO#checkStatusOfPatient(int)
+	 */
+	@Override
+	public String checkStatusOfPatient(int patientId) {
+		return jdbcTemplate.queryForObject(Constant.CHECK_PATIENT_STATUS, new Object[]{patientId}, String.class);
+	}
 
     /**
      * Row mapper for patient table
@@ -99,12 +116,14 @@ public class PatientDAOImpl implements PatientDAO {
             patient.setLastName(rs.getString("last_name"));
             patient.setSex(rs.getInt("sex"));
             patient.setDob(rs.getDate("date_of_birth"));
-            patient.setAddress(rs.getString("mobile_number"));
+            patient.setPhoneNumber(rs.getLong("mobile_number"));
+            patient.setAddress(rs.getString("address"));
             patient.setAlergies(rs.getString("alergies"));
             patient.setUserId(rs.getInt("user_id"));
             return patient;
         }
 
     }
+
 
 }

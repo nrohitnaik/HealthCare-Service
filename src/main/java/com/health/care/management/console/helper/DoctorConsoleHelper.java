@@ -37,10 +37,10 @@ public class DoctorConsoleHelper {
 	}
 
 	/**
+	 * This provides form for doctor to sign up by taking all the input from the console
 	 * @param userName
 	 * @param userId
-	 *            This provides form for doctor to sign up by taking all the
-	 *            input from th console
+	 *            
 	 */
 	void signupAsDoctor(String userName, int userId) {
 		Doctor newDoctor = new Doctor();

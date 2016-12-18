@@ -112,6 +112,9 @@ public class InventoryConsoleHelper {
             selectedBill.setComment(comment);
             inventoryService.saveBill(selectedBill);
             LOGGER.info("bill has been successfully generated for " + selectedDiagnosisId);
+            System.out.println("Bill has been successfully generated. Press any key to return to previous menu");
+            inventoryScanner.nextLine();// swallow the key pressed
+            inventoryManagerMenu();
         } else {
             System.out.println("No enties to generate the bill press any key to return to previous menu");
             inventoryScanner.nextLine();// swallow the key pressed

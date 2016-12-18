@@ -12,16 +12,52 @@ import java.util.List;
 
 public interface PatientService {
 
+    /**
+     * get all the details of patient based on the id provided
+     * @param userId
+     * @return
+     */
     Patient findPatientByUserID(int userId);
 
-    // add or update patient
+    /**
+     *  add  patient
+     * @param patient
+     * @return
+     */
     int savePatientInfo(Patient patient);
 
-    // to update patient
+    /**
+     * to update patient
+     * @param patient
+     * @return
+     */
     int updatePatient(Patient patient);
 
+    /**
+     * 
+     */
     void bookAppointment();
 
+    /**
+     * fetch all the past appointments
+     * @param patientId
+     * @return
+     */
     List<PastAppointmentDetails> fetchPastAppointmentDetials(int patientId);
+    
+    /**
+     * update the status of the patient 
+     * @param patientId
+     * @param status
+     * @return
+     */
+    int updatePatientStatus(int patientId, String status);
+    
+    /**
+     * check the status of the patient based on the id
+     * @param patientId
+     * @return
+     */
+    String checkPatientStatus(int patientId);
 
 }

@@ -140,9 +140,10 @@ public class ReportingDaoImpl implements ReportingDao {
     }
 
     /**
+     * dynamically generates query and feeds generateReportOfSinglePatient
      * @param PatientId
      * @return 
-     * dynamically generates query and feeds generateReportOfSinglePatient
+     * 
      */
     private String getQueryForPatient(int PatientId) {
         String getPatientDetailsById = String.format(Constant.LIST_OF_SINGLE_PATIENT_DETAIL, PatientId);

@@ -53,7 +53,7 @@ public class UserConsoleHelper {
                     System.out.println("Patient menu");
                     // TODO pass the patient pk
                     int patientId = Math.toIntExact(patientService.findPatientByUserID(returnValue.getId()).getId());
-                    patientConsoleHelper.validatedPatientMenu(returnValue.getUserName(), patientId, returnValue.getId());
+                    patientConsoleHelper.checkStatusOfPatient(returnValue.getUserName(), patientId, returnValue.getId());
                     break;
                 }
                 case "doctor": {

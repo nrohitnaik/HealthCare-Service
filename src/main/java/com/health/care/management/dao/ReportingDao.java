@@ -3,28 +3,28 @@ package com.health.care.management.dao;
 
 public interface ReportingDao {
 
-    /**
+    /**generates inventory report
      * @return
-     * generates inventory report
      */
     String generateInventoryReport();
 
     /**
-     * @return
      * generate list of doctors report
+     * @return
      */
     String generateListOfDoctorReport();
 
     /**
-     * @return
      * generates details of all patient
+     * @return
      */
     String generateDetailsOfAllPatient();
 
     /**
+     * generates report for a patient based on id
      * @param patientId
      * @return
-     * generates report for a patient based on id
+     
      */
     String generateReportOfSinglePatient(int patientId);
 

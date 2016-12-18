@@ -1,7 +1,7 @@
 /*
  * Patient.java
  * SRH Hochschule Heidelberg
- * All rights reserverd 2016
+ * All rights reserved 2016
 */
 package com.health.care.management.domain;
 

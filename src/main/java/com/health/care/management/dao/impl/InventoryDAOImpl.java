@@ -57,8 +57,9 @@ public class InventoryDAOImpl implements InventoryDAO {
      */
     @Override
 	public int saveBill(Bill bill) {
+    	
 		return jdbcTemplate.update(Constant.SAVE_BILL,
-				new Object[] { bill.getPatientName(), bill.getDoctorName(), bill.getBillAmount(), bill.getComment(),
+				new Object[] { bill.getPatientName(), bill.getDoctorName(), bill.getBillAmount(), bill.getStatus(),
 						bill.getComment(), bill.getDiagnosisId(), bill.getPatientId() });
 
 	}
