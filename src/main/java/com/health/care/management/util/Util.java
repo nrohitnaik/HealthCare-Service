@@ -67,7 +67,7 @@ public final class Util {
     public static java.util.Date getFormatedDateForString(String dateInString) {
         java.util.Date formattedDate = null;
         try {
-            formattedDate = new SimpleDateFormat("YYYY/MM/DD").parse(dateInString);
+            formattedDate = new SimpleDateFormat("yyyy-MM-dd").parse(dateInString);
         } catch (ParseException execption) {
         	LOGGER.error("invalid date string" + execption.getMessage());
             System.out.println("Invalid date input, please try again");
