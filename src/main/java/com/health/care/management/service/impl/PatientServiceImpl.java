@@ -78,6 +78,9 @@ public class PatientServiceImpl implements PatientService {
 		return patientDAO.checkStatusOfPatient(patientId);
 	}
 
+    /* (non-Javadoc)
+     * @see com.health.care.management.service.PatientService#fetchPastAppointmentDetials(int)
+     */
     @Override
     public List<PastAppointmentDetails> fetchPastAppointmentDetials(int patientId) {
         List<Map<String, Object>> returnedValue = patientDAO.fetchPastAppointmentDetials(patientId);

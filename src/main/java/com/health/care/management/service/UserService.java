@@ -11,11 +11,18 @@ import com.health.care.management.domain.User;
 
 public interface UserService {
 
-    /*
+
+    /**
+     * To save the user
      * @param user
+     * @return
      */
     User saveUser(User user);
 
+    /**
+     * @param user
+     * @return
+     */
     User validateUser(User user);
 
 

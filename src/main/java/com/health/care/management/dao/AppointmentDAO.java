@@ -7,42 +7,47 @@ import java.util.List;
 
 public interface AppointmentDAO {
 
-    /**
-     * @param userId
-     * @param date
-     * @return List<Date>
-     * finds the appointment based on user id and doctor
-     */
-    List<Date> findAvailableAppointmentForDoctor(int userId, String date);
+	/**
+	 * finds the appointment based on user id and doctor
+	 * 
+	 * @param userId
+	 * @param date
+	 * @return List<Date>
+	 */
+	List<Date> findAvailableAppointmentForDoctor(int userId, String date);
 
-    /**
-     * @param appointment
-     * @return int
-     * save the appointment
-     */
-    int saveAppointment(Appointment appointment);
+	/**
+	 * save the appointment
+	 * 
+	 * @param appointment
+	 * @return int
+	 */
+	int saveAppointment(Appointment appointment);
 
-    /**
-     * @param patientId
-     * @param status
-     * @return List<Appointment>
-     * fetch the appointments for patient for given patient id based on status
-     */
-    List<Appointment> fetchAppointmentsByPatientId(int patientId, String status);
+	/**
+	 * fetch the appointments for patient for given patient id based on status
+	 * 
+	 * @param patientId
+	 * @param status
+	 * @return List<Appointment>
+	 */
+	List<Appointment> fetchAppointmentsByPatientId(int patientId, String status);
 
-    /**
-     * @param registartionId
-     * @param status
-     * @return List<Appointment>
-     * fetch the appointments assigned for the doctor based on status
-     */
-    List<Appointment> fetchAppointmentsByDoctorRegsitartionId(int registartionId, String status);
+	/**
+	 * fetch the appointments assigned for the doctor based on status
+	 * 
+	 * @param registartionId
+	 * @param status
+	 * @return List<Appointment>
+	 */
+	List<Appointment> fetchAppointmentsByDoctorRegsitartionId(int registartionId, String status);
 
-    /**
-     * @param status
-     * @param appointmentId
-     * @return int
-     * updates the status of appointment based on appointment id
-     */
-    int updateStatusOfAppointment(String status, int appointmentId);
+	/**
+	 * updates the status of appointment based on appointment id
+	 * 
+	 * @param status
+	 * @param appointmentId
+	 * @return int
+	 */
+	int updateStatusOfAppointment(String status, int appointmentId);
 }

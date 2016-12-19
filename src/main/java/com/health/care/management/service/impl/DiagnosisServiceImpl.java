@@ -15,11 +15,13 @@ public class DiagnosisServiceImpl implements DiagnosisService {
         this.diagnosisDao = new DiagnosisDAOImpl();
     }
 
+    /* (non-Javadoc)
+     * @see com.health.care.management.service.DiagnosisService#saveDiagnosisDetails(com.health.care.management.domain.Diagnosis)
+     */
     @Override
     public int saveDiagnosisDetails(Diagnosis diagnosis) {
         return diagnosisDao.saveDiagnosiedInfoForAppoinntment(diagnosis);
     }
 
-    // TODO need to write a method to get list of diagnosied patient where status is treated.
 
 }

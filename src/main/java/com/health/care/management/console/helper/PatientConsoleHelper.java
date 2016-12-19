@@ -133,6 +133,7 @@ public class PatientConsoleHelper {
             patientFutureAppointment(patientId);// fetch details of future appointment
             
             System.out.println("Press any key to go back to previous menu");
+            patientScanner.nextLine();
             patientScanner.nextLine();// swallow any key and provide the main menu for patient.
             validatedPatientMenu(userName, patientId, userId);// Provide the menu again in order not to break the app
         }
@@ -319,6 +320,7 @@ public class PatientConsoleHelper {
             // Patient has registered but has not made an entry in patient table
             // valid scenario in our case as transaction is not used to roll back from user table.
             // hence considering it as a possible use case calling update page for patient
+        	LOGGER.warn(userName + " user has registered but patient details has not been updated");
             signUpAspatient(userName, userId);
 
         }

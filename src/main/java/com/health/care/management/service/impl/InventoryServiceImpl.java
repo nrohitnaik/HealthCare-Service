@@ -27,21 +27,33 @@ public class InventoryServiceImpl implements InventoryService {
         this.reportingDao = new ReportingDaoImpl();
     }
 
+    /* (non-Javadoc)
+     * @see com.health.care.management.service.InventoryService#getAllInventory()
+     */
     @Override
     public List<Inventory> getAllInventory() {
         return inventoryDao.fetchAllInventory();
     }
 
+    /* (non-Javadoc)
+     * @see com.health.care.management.service.InventoryService#updateInventory(com.health.care.management.domain.Inventory)
+     */
     @Override
     public int updateInventory(Inventory inventory) {
         return inventoryDao.updatedInventory(inventory);
     }
 
+    /* (non-Javadoc)
+     * @see com.health.care.management.service.InventoryService#saveInventory(com.health.care.management.domain.Inventory)
+     */
     @Override
     public int saveInventory(Inventory inventory) {
         return inventoryDao.addInventory(inventory);
     }
 
+    /* (non-Javadoc)
+     * @see com.health.care.management.service.InventoryService#fetchAllDiagnoisedDetail(java.lang.String)
+     */
     @Override
     public List<Bill> fetchAllDiagnoisedDetail(String status) {
         List<Map<String, Object>> returnedValue = diagnosisDao.fetchTreatmentDetailsByStatus(status);
@@ -69,6 +81,9 @@ public class InventoryServiceImpl implements InventoryService {
         return listOfDiagnosiedDetails;
     }
 
+    /* (non-Javadoc)
+     * @see com.health.care.management.service.InventoryService#saveBill(com.health.care.management.domain.Bill)
+     */
     @Override
     public int saveBill(Bill bill) {
         // calculate number of days admitted
@@ -92,16 +107,13 @@ public class InventoryServiceImpl implements InventoryService {
 
     }
 
+    /* (non-Javadoc)
+     * @see com.health.care.management.service.InventoryService#generateReport(int)
+     */
     @Override
     public String generateReport(int selectedReportvalue) {
         String locationOfPdf = null;
         switch (selectedReportvalue) {
-
-        // "Hi Welcome to report generating srevice"
-        // + "\nSelect '1' to generate report for all available doctors"
-        // + "\nSelect '2'for report of all patient"
-        // + "\nSelect '3'for report of all inventories"
-        // + "\nSelect '4' for report of particular patient"
         case 1: {
             locationOfPdf = reportingDao.generateListOfDoctorReport();
             break;

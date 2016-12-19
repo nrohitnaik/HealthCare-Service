@@ -18,7 +18,6 @@ import java.util.Scanner;
 
 import org.apache.log4j.Logger;
 
-
 public class DoctorConsoleHelper {
 	private static final Logger LOGGER = Logger.getLogger(DoctorConsoleHelper.class);
 
@@ -37,10 +36,12 @@ public class DoctorConsoleHelper {
 	}
 
 	/**
-	 * This provides form for doctor to sign up by taking all the input from the console
+	 * This provides form for doctor to sign up by taking all the input from the
+	 * console
+	 * 
 	 * @param userName
 	 * @param userId
-	 *            
+	 * 
 	 */
 	void signupAsDoctor(String userName, int userId) {
 		Doctor newDoctor = new Doctor();
@@ -75,7 +76,7 @@ public class DoctorConsoleHelper {
 		LOGGER.info("Signing up doctor " + newDoctor.toString());
 		int rowAffected = doctorService.saveDoctorInfo(newDoctor);
 		if (0 != rowAffected) {
-			LOGGER.info("Doctor "+newDoctor.getFirstName() + " has been successfully registered ");
+			LOGGER.info("Doctor " + newDoctor.getFirstName() + " has been successfully registered ");
 			validatedDoctorMenu(userName, userId, newDoctor.getRegistrationId());
 		} else {
 			LOGGER.error("Error occure in signing up doctor. Presenting the signup form again");
@@ -85,13 +86,15 @@ public class DoctorConsoleHelper {
 	}
 
 	/**
+	 * Provides menu for the validated doctor
+	 * 
 	 * @param userName
 	 * @param userId
 	 * @param registrationId
-	 *            Provides menu for the validated doctor
+	 * 
 	 */
 	void validatedDoctorMenu(String userName, int userId, int registrationId) {
-		LOGGER.debug("Entering doctor validation menu for username " + userName );
+		LOGGER.debug("Entering doctor validation menu for username " + userName);
 		System.out.println("Hi Doc " + userName + ", please choose the following option");
 		System.out.println("Select '1' to update personal details.");
 		System.out.println("Select '2' to view apppointments.");
@@ -100,7 +103,7 @@ public class DoctorConsoleHelper {
 		userNameofDoctor = userName;
 		LOGGER.info("selected input by doctor " + userName + " is " + selectedValue);
 		switch (selectedValue) {
-		
+
 		case 0: {
 			HealthCareServiceApplication.getnstance().getUserConsoleHelper().kickStartApplication();
 
@@ -118,7 +121,7 @@ public class DoctorConsoleHelper {
 
 		default: {
 			System.out.println("Invalid option selected, please selecte the right one");
-			LOGGER.warn(userName +" entered invalid input");
+			LOGGER.warn(userName + " entered invalid input");
 			validatedDoctorMenu(userName, userId, registrationId);
 		}
 		}
@@ -126,31 +129,33 @@ public class DoctorConsoleHelper {
 	}
 
 	/**
+	 * Used to populate the existing details returned from database on the
+	 * console case '1' if doctor choose to update the info
+	 * 
 	 * @param doctor
 	 * @param userId
 	 * @param registrationId
-	 *            Used to populate the existing details returned from database
-	 *            on the console
-	 *            case '1' if doctor choose to update the info
+	 * 
 	 */
 	private void populateExistingDetails(Doctor doctor, int userId, int registrationId) {
 		System.out.println("Please choose an option to edit and '0' to complete updating");
 		System.out.println(doctor.toString());
-		LOGGER.debug("populating the user info for user id "+ userId + doctor.toString());
+		LOGGER.debug("populating the user info for user id " + userId + doctor.toString());
 		switchOption(doctor, userId, registrationId);
 
 	}
 
 	/**
+	 * Take the input from the console and performs the intended operation
+	 * 
 	 * @param doctor
 	 * @param userId
 	 * @param registrationId
-	 *            Take the input from the console and performes the intended
-	 *            opertaion
+	 * 
 	 */
 	private void switchOption(Doctor doctor, int userId, int registrationId) {
 		int selectedOption = doctorScanner.nextInt();
-		LOGGER.info(doctor.getFirstName() +" seleced the value " + selectedOption);
+		LOGGER.info(doctor.getFirstName() + " seleced the value " + selectedOption);
 		doctorScanner.nextLine();
 		switch (selectedOption) {
 		case (1): {
@@ -249,33 +254,36 @@ public class DoctorConsoleHelper {
 	}
 
 	/**
+	 * This will update the doctor info
+	 * 
 	 * @param doctor
 	 * @param userId
 	 * @param registraionId
-	 * This will update the doctor info
+	 * 
 	 */
 	private void updateDoctor(Doctor doctor, int userId, int registraionId) {
 		doctorService.updateDoctorInfo(doctor);
-		LOGGER.info(userId + " Details for "+doctor.getFirstName() + " has been saved successfully");
+		LOGGER.info(userId + " Details for " + doctor.getFirstName() + " has been saved successfully");
 		System.out.println(
 				doctor.getFirstName() + " details updated sccuessfully. Press any key to return to previous menu");
 		doctorScanner.nextLine();
 		doctorScanner.nextLine();// gentle pause
 		validatedDoctorMenu(userNameofDoctor, userId, registraionId);
 	}
- 
-	
+
 	/**
+	 * case '2' if doctor choose to view his appointment This will list all the
+	 * appointments associated to the doctor
+	 * 
 	 * @param userName
 	 * @param userId
-	 * case '2' if doctor choose to view his appointment
-	 * This will list all the appointments associated to the doctor
+	 * 
 	 */
 	private void viewAppointmentlist(String userName, int userId) {
 		System.out.println("Appointment Id\t Date&Time\t patient name\t comment\t  illness\t alergies");
 		List<Appointment> appointmentlist = appointmentService.fetchAppointments(userId, "booked", "doctor");
 		appointmentlist.forEach(a -> {
-			LOGGER.debug("Appointment details for doctor id" + userId +" are as follows" + a.toStringForDoctor());
+			LOGGER.debug("Appointment details for doctor id" + userId + " are as follows" + a.toStringForDoctor());
 			System.out.println(a.toStringForDoctor());
 		});
 		System.out.println("Select the appointment id to treat the patient ");
@@ -286,12 +294,14 @@ public class DoctorConsoleHelper {
 	}
 
 	/**
+	 * Provides the form for the doctor to add diagnosis info for the
+	 * 
 	 * @param doctorUserName
 	 * @param appointmentId
-	 * Provides the form for the doctor to add diagnosis info for the 
+	 * 
 	 */
 	private void treatmeantForm(String doctorUserName, int appointmentId) {
-		LOGGER.debug("Entering treatment doctor id=" + doctorUserName + " appointment id is "+ appointmentId);
+		LOGGER.debug("Entering treatment doctor id=" + doctorUserName + " appointment id is " + appointmentId);
 		doctorScanner.nextLine();
 		System.out.println("Welcome to treatment service");
 		System.out.println("Enter the prescription details");
@@ -318,7 +328,8 @@ public class DoctorConsoleHelper {
 
 		int rowsAffected = diagnosisService.saveDiagnosisDetails(diagnosis);
 		if (0 != rowsAffected) {
-			LOGGER.info("Diagnosis details has been successfully saved by doctor "+ doctorUserName +" for appointment id "+ appointmentId);
+			LOGGER.info("Diagnosis details has been successfully saved by doctor " + doctorUserName
+					+ " for appointment id " + appointmentId);
 			appointmentService.updateStatusOfDiagnosiedAppointment(status, appointmentId);
 		}
 	}

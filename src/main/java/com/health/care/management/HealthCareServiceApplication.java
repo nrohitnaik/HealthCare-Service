@@ -26,8 +26,9 @@ public class HealthCareServiceApplication {
 	private static HealthCareServiceApplication instance = null;
 
 	/**
-	 * @return HealthCareServiceApplication returns the singleton object of this
-	 *         class
+	 * HealthCareServiceApplication returns the singleton object of this class
+	 * 
+	 * @return HealthCareServiceApplication
 	 */
 	public static HealthCareServiceApplication getnstance() {
 		if (null == instance) {
@@ -104,8 +105,10 @@ public class HealthCareServiceApplication {
 	}
 
 	/**
-	 * @param args
 	 * Entry point of the application
+	 * 
+	 * @param args
+	 * 
 	 */
 	public static void main(String[] args) {
 		LOGGER.info("Application is starting up...");

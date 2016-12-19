@@ -7,25 +7,28 @@ import java.util.Map;
 
 public interface DiagnosisDAO {
 
-    /**
-     * @param diagnosis
-     * @return
-     * saves the diagnosis info
-     */
-    int saveDiagnosiedInfoForAppoinntment(Diagnosis diagnosis);
+	/**
+	 * saves the diagnosis info
+	 * 
+	 * @param diagnosis
+	 * @return
+	 */
+	int saveDiagnosiedInfoForAppoinntment(Diagnosis diagnosis);
 
-    /**
-     * @param status
-     * @return
-     * fetch all the diagnosis info based on status
-     */
-    List<Map<String, Object>> fetchTreatmentDetailsByStatus(String status);
+	/**
+	 * fetch all the diagnosis info based on status
+	 * 
+	 * @param status
+	 * @return
+	 */
+	List<Map<String, Object>> fetchTreatmentDetailsByStatus(String status);
 
-    /**
-     * @param status
-     * @param diagnosisId
-     * @return
-     * update the status of diagnosis based on diagnosis id
-     */
-    int updateTheDiagnosisStatus(String status, int diagnosisId);
+	/**
+	 * update the status of diagnosis based on diagnosis id
+	 * 
+	 * @param status
+	 * @param diagnosisId
+	 * @return
+	 */
+	int updateTheDiagnosisStatus(String status, int diagnosisId);
 }

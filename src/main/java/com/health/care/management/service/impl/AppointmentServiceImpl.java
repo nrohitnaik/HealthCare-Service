@@ -17,11 +17,17 @@ public class AppointmentServiceImpl implements AppointmentService {
     }
 
 
+    /* (non-Javadoc)
+     * @see com.health.care.management.service.AppointmentService#saveAppointment(com.health.care.management.domain.Appointment)
+     */
     @Override
     public int saveAppointment(Appointment appointment) {
         return appointmentDAO.saveAppointment(appointment);
     }
 
+    /* (non-Javadoc)
+     * @see com.health.care.management.service.AppointmentService#fetchAppointments(int, java.lang.String, java.lang.String)
+     */
     @Override
     public List<Appointment> fetchAppointments(int userId, String status, String role) {
         List<Appointment> appointments = null;
@@ -33,6 +39,9 @@ public class AppointmentServiceImpl implements AppointmentService {
         return appointments;
     }
 
+    /* (non-Javadoc)
+     * @see com.health.care.management.service.AppointmentService#updateStatusOfDiagnosiedAppointment(java.lang.String, int)
+     */
     @Override
     public int updateStatusOfDiagnosiedAppointment(String status, int appointmentId) {
         appointmentDAO.updateStatusOfAppointment(status, appointmentId);

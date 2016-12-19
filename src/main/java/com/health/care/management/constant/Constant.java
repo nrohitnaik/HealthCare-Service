@@ -16,7 +16,7 @@ public abstract class Constant {
     public static final String SAVE_USER = "INSERT INTO user (username, password, role) VALUES(?, ?, ?)";
     public static final String VALIDATE_USER = "select user_id,username,role,password from user where username=?";
     // Patinet related queries
-    public static final String FETCH_PATIENT_DETAILS_BY_USERNAME = "SELECT * FROM patient where user_id =?";
+    public static final String FETCH_PATIENT_DETAILS_BY_USERNAME = "SELECT patient.patient_id,patient.first_name,patient.last_name,patient.sex,patient.date_of_birth,patient.address,patient.mobile_number,patient.alergies,patient.user_id FROM patient where user_id =?";
     public static final String UPDATE_PATIENT_INFO = "UPDATE patient SET first_name=?, last_name=?,sex=?, date_of_birth=?, address=?, mobile_number=?, alergies=?  WHERE user_id=?";
     public static final String SAVE_PATIENT = "INSERT INTO patient (first_name, last_name, sex, date_of_birth, address, mobile_number, alergies, user_id )  VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
   // TODO user_id or patient_id
@@ -26,7 +26,7 @@ public abstract class Constant {
     // Doctor related queries
     public static final String SAVE_DOCTOR = "INSERT INTO doctor(registration_id,first_name,last_name,specialization,department,experience,qualification,mobile_no,email,working_hours,status,user_id) VALUES(?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     public static final String UPDATE_DOCTOR_INFO = "UPDATE doctor SET first_name=?, last_name=?,specialization=?,department=?,experience=?,qualification=?,mobile_no=?,email=?,working_hours=?,status=?  WHERE user_id=?";
-    public static final String FETCH_DOCTOR_DETAILS_BY_USERNAME = "SELECT * FROM doctor where user_id =?";
+    public static final String FETCH_DOCTOR_DETAILS_BY_USERNAME = " SELECT doctor.registration_id,doctor.first_name,doctor.last_name,doctor.specialization,doctor.department,doctor.experience,doctor.qualification,doctor.mobile_no,doctor.email,doctor.working_hours,doctor.status,doctor.user_id FROM doctor where user_id =?";
     public static final String FETCH_DEPT_LIST = "SELECT DISTINCT department FROM doctor";
     public static final String FETCH_ALL_DOCTOR = "SELECT registration_id,first_name,last_name,specialization,department,qualification,mobile_no,email,status  FROM doctor";
     public static final String FETCH_DOCT_LIST_BY_DEPT = "SELECT registration_id,first_name,last_name,user_id FROM doctor WHERE department=?";

@@ -19,13 +19,14 @@ public class HealthCareServiceConfiguration {
 	private static JdbcTemplate jdbcTemplate = null;
 
 	/**
-	 * @return jdbcTemplate This methods return the jdbc connection if
-	 *         connection doesn't exists and single connection is maintained
-	 *         across the application
+	 * This methods return the jdbc connection if connection doesn't exists and
+	 * single connection is maintained across the application
+	 * 
+	 * @return JdbcTemplate
 	 */
 	public static JdbcTemplate getJdbcConnection() {
 		if (null == jdbcTemplate) {
- 			LOGGER.info("Creating jdbc instacane..");
+			LOGGER.info("Creating jdbc instacane..");
 			try {
 				Properties properties = new Properties();
 				InputStream ioStream = HealthCareServiceApplication.class.getClassLoader()
@@ -42,8 +43,7 @@ public class HealthCareServiceConfiguration {
 				LOGGER.info("Database connection has been successfully established");
 			} catch (IOException execption) {
 				LOGGER.error("Exception occured while creating db connection " + execption.getMessage());
-				System.out.println("Error occured while reading the property file. Please configure it in right path"
-						+ execption.getMessage());
+				System.out.println("Error occured while reading the property file. Please configure it in right path");
 			}
 		}
 		return jdbcTemplate;

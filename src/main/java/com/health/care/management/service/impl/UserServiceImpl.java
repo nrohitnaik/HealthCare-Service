@@ -15,6 +15,9 @@ public class UserServiceImpl implements UserService {
         this.userDao = new UserDAOImpl();
     }
 
+    /* (non-Javadoc)
+     * @see com.health.care.management.service.UserService#saveUser(com.health.care.management.domain.User)
+     */
     @Override
     public User saveUser(User user) {
         User newUser = new User();
@@ -36,6 +39,9 @@ public class UserServiceImpl implements UserService {
         return newUser;
     }
 
+    /* (non-Javadoc)
+     * @see com.health.care.management.service.UserService#validateUser(com.health.care.management.domain.User)
+     */
     @Override
     public User validateUser(User user) {
         User returnedDomain = userDao.validateUser(user);
