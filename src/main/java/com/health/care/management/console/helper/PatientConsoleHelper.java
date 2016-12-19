@@ -132,7 +132,7 @@ public class PatientConsoleHelper {
             System.out.println("Welcome to view future appointments page");
             patientFutureAppointment(patientId);// fetch details of future appointment
             
-            System.out.println("Press any key to go back to previous menu");
+            System.out.println("Enter any key to go back to previous menu");
             patientScanner.nextLine();
             patientScanner.nextLine();// swallow any key and provide the main menu for patient.
             validatedPatientMenu(userName, patientId, userId);// Provide the menu again in order not to break the app
@@ -140,7 +140,7 @@ public class PatientConsoleHelper {
         
         case 5:{
         	patientScanner.nextLine();
-        	System.out.println("Are you sure you want to deactivate the account\nPress 'yes' to deactivate\nPress 'no' to return to main menu");
+        	System.out.println("Are you sure you want to deactivate the account\nEnter 'yes' to deactivate\nEnter 'no' to return to main menu");
         	String toBeDeactivated=patientScanner.nextLine();
 	       		if(toBeDeactivated.equalsIgnoreCase("yes")){
 	       		patientService.updatePatientStatus(patientId, "deactivated");
