@@ -9,6 +9,7 @@ import com.health.care.management.dao.impl.ReportingDaoImpl;
 import com.health.care.management.domain.Bill;
 import com.health.care.management.domain.Inventory;
 import com.health.care.management.service.InventoryService;
+import com.health.care.management.util.Util;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -71,8 +72,8 @@ public class InventoryServiceImpl implements InventoryService {
             bill.setPatientName(salutation + a.get("p_first_name").toString() + " " + a.get("p_last_name").toString());
             // null check only for admite date. coz if admit date is present doctor will have provided the discharge date.
             if (null != a.get("admit_date")) {
-                bill.setAdmitDate(new Date(a.get("admit_date").toString()));
-                bill.setDischargeDate(new Date(a.get("discharge_date").toString()));
+                bill.setAdmitDate(Util.getFormatedDateForString(a.get("admit_date").toString()));
+                bill.setDischargeDate(Util.getFormatedDateForString(a.get("discharge_date").toString()));
             }
             bill.setDoctorSpecialization(a.get("specialization").toString());
             bill.setDiagnosisId(Integer.valueOf(a.get("diagnosis_id").toString()));
