@@ -161,7 +161,7 @@ public class DoctorConsoleHelper {
 		case (1): {
 			System.out.println("Enter the new first name. Existing is " + doctor.getFirstName());
 			String updatedFirstName = doctorScanner.nextLine();
-			if (null != updatedFirstName) {
+			if (!updatedFirstName.isEmpty()) {
 				doctor.setFirstName(updatedFirstName);
 			}
 			break;
@@ -169,7 +169,7 @@ public class DoctorConsoleHelper {
 		case (2): {
 			System.out.println("Enter the new last name.. Existing is " + doctor.getLastName());
 			String updatedLastName = doctorScanner.nextLine();
-			if (null != updatedLastName) {
+			if ( ! updatedLastName.isEmpty()) {
 				doctor.setLastName(updatedLastName);
 			}
 			break;
@@ -177,7 +177,7 @@ public class DoctorConsoleHelper {
 		case (3): {
 			System.out.println("Enter the specialization.. Existing is  " + doctor.getSpecialization());
 			String updatedSpecialization = doctorScanner.nextLine();
-			if (null != updatedSpecialization) {
+			if ( ! updatedSpecialization.isEmpty()) {
 				doctor.setSpecialization(updatedSpecialization);
 			}
 			break;
@@ -185,7 +185,7 @@ public class DoctorConsoleHelper {
 		case (4): {
 			System.out.println("Enter the department.. Existing is " + doctor.getDepartment());
 			String updatedDepartment = doctorScanner.nextLine();
-			if (null != updatedDepartment) {
+			if ( ! updatedDepartment.isEmpty()) {
 				doctor.setDepartment(updatedDepartment);
 			}
 			break;
@@ -201,7 +201,7 @@ public class DoctorConsoleHelper {
 		case (6): {
 			System.out.println("Enter the qualification.. Existing is " + doctor.getQualification());
 			String updatedQualification = doctorScanner.nextLine();
-			if (null != updatedQualification) {
+			if ( !updatedQualification.isEmpty()) {
 				doctor.setQualification(updatedQualification);
 			}
 			break;
@@ -209,7 +209,7 @@ public class DoctorConsoleHelper {
 		case (7): {
 			System.out.println("Enter the working hours.. Existing is " + doctor.getQualification());
 			String updatedWorkingHours = doctorScanner.nextLine();
-			if (null != updatedWorkingHours) {
+			if ( ! updatedWorkingHours.isEmpty()) {
 				doctor.setWorkingHours(updatedWorkingHours);
 			}
 			break;
@@ -217,7 +217,7 @@ public class DoctorConsoleHelper {
 		case (8): {
 			System.out.println("Enter the email.. Existing is " + doctor.getEmail());
 			String updatedEmail = doctorScanner.nextLine();
-			if (null != updatedEmail) {
+			if ( ! updatedEmail.isEmpty()) {
 				doctor.setEmail(updatedEmail);
 			}
 			break;
@@ -225,7 +225,7 @@ public class DoctorConsoleHelper {
 		case (9): {
 			System.out.println("Enter the experience.. Existing is " + doctor.getExperience());
 			String updatedExperience = doctorScanner.nextLine();
-			if (null != updatedExperience) {
+			if ( ! updatedExperience.isEmpty()) {
 				doctor.setExperience(updatedExperience);
 			}
 			break;

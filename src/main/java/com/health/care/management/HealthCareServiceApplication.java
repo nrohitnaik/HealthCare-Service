@@ -13,7 +13,7 @@ import java.util.Scanner;
 
 import org.apache.log4j.Logger;
 
-public class HealthCareServiceApplication {
+public final class HealthCareServiceApplication {
 	private static Logger LOGGER = Logger.getLogger(HealthCareServiceApplication.class);
 	private Scanner ioScanner;
 	private UserConsoleHelper userConsoleHelper;
@@ -41,6 +41,7 @@ public class HealthCareServiceApplication {
 
 	/**
 	 * Default constructor used to initialize the variables
+	 * made private in order to prevent instantiation
 	 */
 	private HealthCareServiceApplication() {
 		this.ioScanner = new Scanner(System.in);

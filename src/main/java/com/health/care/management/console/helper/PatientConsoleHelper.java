@@ -81,7 +81,7 @@ public class PatientConsoleHelper {
     }
 
      /**
-      *Form to provide patient with option
+      *Provides menu for validated patient
      * @param userName
      * @param patientId
      * @param userId
@@ -304,7 +304,7 @@ public class PatientConsoleHelper {
 
      
     /**
-     * if user selects '1' this option has to presented
+     * if user selects '1' this option has to presented 
      * @param userName
      * @param patientId
      * @param userId

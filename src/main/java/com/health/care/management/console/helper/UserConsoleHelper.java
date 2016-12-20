@@ -46,12 +46,13 @@ public class UserConsoleHelper {
 		if (initialSelction == 1) {
 			// Used to validate the user and respond with appropriate pages
 			User returnValue = validateUserLogin();
-			if (returnValue.getStatus() == "valid") {
+			if (returnValue.getStatus().equalsIgnoreCase("valid")) {
 				switch (returnValue.getRole()) {
 				case "patient": {
 					System.out.println("Patient menu");
-					// TODO pass the patient pk
+					// fetching the patient info to get patient primary key
 					int patientId = Math.toIntExact(patientService.findPatientByUserID(returnValue.getId()).getId());
+					//check whether the patient is active or not.
 					patientConsoleHelper.checkStatusOfPatient(returnValue.getUserName(), patientId,
 							returnValue.getId());
 					break;
