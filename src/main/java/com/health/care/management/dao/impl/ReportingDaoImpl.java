@@ -7,6 +7,7 @@ import com.health.care.management.dao.ReportingDao;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 
+import org.apache.log4j.Logger;
 import org.springframework.jdbc.datasource.DataSourceUtils;
 
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
@@ -18,6 +19,8 @@ import net.sf.dynamicreports.report.constant.HorizontalAlignment;
 import net.sf.dynamicreports.report.exception.DRException;
 
 public class ReportingDaoImpl implements ReportingDao {
+	private static Logger LOGGER = Logger.getLogger(ReportingDaoImpl.class);
+
 
 
     /* (non-Javadoc)
@@ -57,7 +60,7 @@ public class ReportingDaoImpl implements ReportingDao {
                 Columns.column("Mobile Number", "mobile_no", DataTypes.bigDecimalType()),
                 Columns.column("Email", "email", DataTypes.stringType()),
                 Columns.column("Status(1= available,0=unavailable)", "status", DataTypes.stringType()))
-                .title(Components.text("List of all the doctors").setHorizontalAlignment(HorizontalAlignment.CENTER))
+                .title(Components.text("List of all doctors").setHorizontalAlignment(HorizontalAlignment.CENTER))
                 .pageFooter(Components.pageXofY())
                 .setDataSource(Constant.FETCH_ALL_DOCTOR, DataSourceUtils.getConnection(HealthCareServiceConfiguration.getJdbcConnection().getDataSource()));
         return generateReport(report, listOfAllDoctorFilePath);
@@ -85,7 +88,7 @@ public class ReportingDaoImpl implements ReportingDao {
                 Columns.column("Department", "department", DataTypes.stringType()),
                 Columns.column("Mobile Number", "mobile_no", DataTypes.bigDecimalType()),
                 Columns.column("Doctor Treatment prescription", "prescription", DataTypes.stringType()), Columns.column("Diagnosis Status", "status", DataTypes.stringType()))
-                .title(Components.text("List of all the Patients treated").setHorizontalAlignment(HorizontalAlignment.CENTER))
+                .title(Components.text("List of all Patients treated").setHorizontalAlignment(HorizontalAlignment.CENTER))
                 .pageFooter(Components.pageXofY())
                 .setDataSource(Constant.LIST_OF_ALL_PATIENT, DataSourceUtils.getConnection(HealthCareServiceConfiguration.getJdbcConnection().getDataSource()));
 
@@ -114,7 +117,7 @@ public class ReportingDaoImpl implements ReportingDao {
                 Columns.column("Doctor Treatment prescription", "prescription", DataTypes.stringType()), 
                 Columns.column("Diagnosis Status", "status", DataTypes.stringType()))
                 .title(// title of the report
-                        Components.text("List of all the Patients treated").setHorizontalAlignment(HorizontalAlignment.CENTER))
+                        Components.text("Report for patient id :"+ patientId).setHorizontalAlignment(HorizontalAlignment.CENTER))
                 .pageFooter(Components.pageXofY())// show page number on the page footer
                 .setDataSource(getQueryForPatient(patientId), DataSourceUtils.getConnection(HealthCareServiceConfiguration.getJdbcConnection().getDataSource()));
         return generateReport(report, detailsOfSinglePatientFilePath);
@@ -131,10 +134,9 @@ public class ReportingDaoImpl implements ReportingDao {
             reportObject.show();
             // export the report to a pdf file
             reportObject.toPdf(new FileOutputStream(filePath));
-        } catch (DRException e) {
-            System.out.println("Exception occured due to" + e.getMessage());
-        } catch (FileNotFoundException e) {
-            System.out.println("Exception occured due to" + e.getMessage());
+        } catch (DRException | FileNotFoundException e) {
+        	LOGGER.error("Error occured while generating the report due to "+ e.getMessage());
+            System.out.println("Exception occured while generating report");
         }
         return filePath;
     }
@@ -147,6 +149,7 @@ public class ReportingDaoImpl implements ReportingDao {
      */
     private String getQueryForPatient(int PatientId) {
         String getPatientDetailsById = String.format(Constant.LIST_OF_SINGLE_PATIENT_DETAIL, PatientId);
+        LOGGER.debug("Generated query for the report generation of patient id: "+ PatientId + " "+ getPatientDetailsById);
         return getPatientDetailsById;
     }
 }
