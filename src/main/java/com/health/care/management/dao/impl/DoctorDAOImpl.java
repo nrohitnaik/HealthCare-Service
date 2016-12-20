@@ -100,7 +100,7 @@ public class DoctorDAOImpl implements DoctorDAO {
             doctor.setQualification(rs.getString("qualification"));
             doctor.setPhoneNumber(rs.getLong("mobile_no"));
             doctor.setEmail(rs.getString("email"));
-            doctor.setWorkingHours("working_hours");
+            doctor.setWorkingHours(rs.getString("working_hours"));
             doctor.setAvailability(rs.getInt("status"));
             doctor.setUserId(rs.getInt("user_id"));
             return doctor;
