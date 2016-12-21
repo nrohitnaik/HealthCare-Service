@@ -63,7 +63,11 @@ public final class Util {
         return returnValue;
     }
 
-    // Fomrated date .
+    /**
+     * Fomrated date .
+     * @param dateInString
+     * @return
+     */
     public static java.util.Date getFormatedDateForString(String dateInString) {
         java.util.Date formattedDate = null;
         try {

@@ -115,7 +115,7 @@ public class ReportingDaoImpl implements ReportingDao {
                 Columns.column("Department", "department", DataTypes.stringType()),
                 Columns.column("Mobile Number", "mobile_no", DataTypes.bigDecimalType()),
                 Columns.column("Doctor Treatment prescription", "prescription", DataTypes.stringType()), 
-                Columns.column("Diagnosis Status", "status", DataTypes.stringType()))
+                Columns.column("Status", "status", DataTypes.stringType()))
                 .title(// title of the report
                         Components.text("Report for patient id :"+ patientId).setHorizontalAlignment(HorizontalAlignment.CENTER))
                 .pageFooter(Components.pageXofY())// show page number on the page footer

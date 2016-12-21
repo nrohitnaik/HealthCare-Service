@@ -98,7 +98,7 @@ public class DoctorConsoleHelper {
 		System.out.println("Hi Doc " + userName + ", please choose the following option");
 		System.out.println("Select '1' to update personal details.");
 		System.out.println("Select '2' to view apppointments.");
-		System.out.println("Slect '0' to logout");
+		System.out.println("Select '0' to logout");
 		int selectedValue = doctorScanner.nextInt();
 		userNameofDoctor = userName;
 		LOGGER.info("selected input by doctor " + userName + " is " + selectedValue);
@@ -115,7 +115,7 @@ public class DoctorConsoleHelper {
 		}
 		case 2: {
 			System.out.println("Welcome to view appointment service");
-			viewAppointmentlist(userName, registrationId);
+			viewAppointmentlist(userName, registrationId,userId);
 			validatedDoctorMenu(userName, userId, registrationId);
 		}
 
@@ -279,9 +279,13 @@ public class DoctorConsoleHelper {
 	 * @param userId
 	 * 
 	 */
-	private void viewAppointmentlist(String userName, int userId) {
-		System.out.println("Appointment Id\t Date&Time\t patient name\t comment\t  illness\t alergies");
+	private void viewAppointmentlist(String userName, int userId, int registrationId) {
+		
+		
 		List<Appointment> appointmentlist = appointmentService.fetchAppointments(userId, "booked", "doctor");
+
+		System.out.println("Appointment Id\t Date&Time\t patient name\t comment\t  illness\t alergies");
+	
 		appointmentlist.forEach(a -> {
 			LOGGER.debug("Appointment details for doctor id" + userId + " are as follows" + a.toStringForDoctor());
 			System.out.println(a.toStringForDoctor());
@@ -290,6 +294,7 @@ public class DoctorConsoleHelper {
 		int selectedAppointmentId = doctorScanner.nextInt();
 
 		treatmeantForm(userName, selectedAppointmentId);
+	
 
 	}
 
